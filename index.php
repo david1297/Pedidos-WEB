@@ -38,7 +38,8 @@ $sql="SELECT * FROM pedidoe where Fecha =CURDATE() and pedidoe.USERNAME ='".$_SE
         <?php
         $sql="SELECT Tipo,Numero,Subtotal+Iva as Total ,Terceros.company FROM pedidoe 
         inner join Terceros on  Terceros.Id_N = pedidoe.Id_N 
-        where pedidoe.Fecha =CURDATE() and pedidoe.USERNAME ='".$_SESSION['USERNAME']."' ";
+        where pedidoe.Fecha =CURDATE() and pedidoe.USERNAME ='".$_SESSION['USERNAME']."'
+        GROUP BY Tipo,Numero,total ,Terceros.company ";
         $SumCant= 0;
         $SumTotal= 0;
         $query = mysqli_query($con, $sql);
