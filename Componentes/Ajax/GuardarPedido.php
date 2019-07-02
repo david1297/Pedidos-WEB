@@ -17,6 +17,8 @@ $Subtotal = $row['Subtotal'];
 $Iva = $row['Iva'];
 $Descuento = $row['Descuento'];
 $Comentario = $row['Comentario'];
+$BONOTOTAL = $row['BONOTOTAL'];
+$Terms = $row['Terms'];
 
 
 if ($Numero<>0){
@@ -48,8 +50,8 @@ if($OPeracion == 'Editar'){
 	$query_update = mysqli_query($con,$sql);	
 }
 
-$sql =  "INSERT INTO pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,Fecha,Hora,USERNAME,IDVEND,SINC,Estado) VALUES 
-('$Tipo',$Numero_PE,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$Fecha','$Hora','$USERNAME',$IDVEND,'N','Pendiente');";
+$sql =  "INSERT INTO pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,Fecha,Hora,USERNAME,IDVEND,SINC,Estado,BONOTOTAL,Terms) VALUES 
+('$Tipo',$Numero_PE,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$Fecha','$Hora','$USERNAME',$IDVEND,'N','Pendiente',$BONOTOTAL,'$Terms');";
 $query_update = mysqli_query($con,$sql);
 
 if ($OPeracion == 'Nuevo'){

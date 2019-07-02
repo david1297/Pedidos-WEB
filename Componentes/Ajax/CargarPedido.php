@@ -30,13 +30,15 @@ $Descuento = $row['Descuento'];
 $Comentario = $row['Comentario'];
 $USERNAME = $row['USERNAME'];
 $IDVEND = $row['IDVEND'];
+$BONOTOTAL = $row['BONOTOTAL'];
+$Terms = $row['Terms'];
 
 
 
 
 
-	$sql =  "INSERT INTO temp_pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,USERNAME,IDVEND) VALUES 
-	('$Tipo',$Numero,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$USERNAME',$IDVEND);";
+	$sql =  "INSERT INTO temp_pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,USERNAME,IDVEND,BONOTOTAL,Terms) VALUES 
+	('$Tipo',$Numero,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$USERNAME',$IDVEND,$BONOTOTAL,'$Terms');";
 	$query_update = mysqli_query($con,$sql);
     if ($query_update) {
         $messages = "Los Datos Se Han Guardado Con Exito.";

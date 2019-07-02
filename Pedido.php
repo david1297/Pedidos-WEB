@@ -11,9 +11,14 @@ if(isset($_GET['T'])){
     $query = mysqli_query($con, $sql);
     $row=mysqli_fetch_array($query);
     if ($row[0]==0){
-      $sql =  "INSERT INTO temp_pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento) VALUES
+      $sql="SELECT Terms FROM Terceros where Id_N ='$Id_N' ";
+      $query = mysqli_query($con, $sql);
+      $row=mysqli_fetch_array($query);
+
+      $sql =  "INSERT INTO temp_pedidoe
+       (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Terms) VALUES
       
-       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0);";
+       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0,".$row[0].");";
         $query_update = mysqli_query($con,$sql);
         $Pedido='Nuevo Pedido';
     }else{
