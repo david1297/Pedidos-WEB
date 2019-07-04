@@ -12,7 +12,7 @@ $sql="SELECT PORCENTAJE,IVA FROM items where ITEM ='$Item' ";
 $query = mysqli_query($con, $sql);
 $row=mysqli_fetch_array($query);
 $Porcentaje = $row['PORCENTAJE'];
-$Tarifa = $row['IVA'];
+$Tarifa = $row['PORCENTAJE'];
 
 $Iva = $Subtotal*($Porcentaje/100);
 

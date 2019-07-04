@@ -51,14 +51,14 @@ if($OPeracion == 'Editar'){
 }
 
 $sql =  "INSERT INTO pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,Fecha,Hora,USERNAME,IDVEND,SINC,Estado,BONOTOTAL,Terms) VALUES 
-('$Tipo',$Numero_PE,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$Fecha','$Hora','$USERNAME',$IDVEND,'N','Pendiente',$BONOTOTAL,'$Terms');";
+('$Tipo',$Numero_PE,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$Fecha','$Hora','$USERNAME',$IDVEND,'N','PENDIENTE',$BONOTOTAL,'$Terms');";
 $query_update = mysqli_query($con,$sql);
 
 if ($OPeracion == 'Nuevo'){
 	NuevoE($Tipo,$Numero_PE);
 }	
 
-$sql="SELECT * FROM temp_pedidod where Id_N ='$Id_N' ";
+$sql="SELECT * FROM temp_pedidod where Id_N ='$Id_N' and Estado <> 'Eliminado' ";
 $query = mysqli_query($con, $sql);
 while($row=mysqli_fetch_array($query)){
 	$Item = $row['Item'];
@@ -73,7 +73,7 @@ while($row=mysqli_fetch_array($query)){
 	$Tarifa = $row['Tarifa'];
 
 	$sql =  "INSERT INTO pedidod (Tipo,Numero,Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa) VALUES 
-	('$Tipo',$Numero_PE,'$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$Comentario',$Precio,'$Bodega',$Tarifa);";
+	('$Tipo',$Numero_PE,'$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa);";
 	$query_update = mysqli_query($con,$sql);
 }
 if ($OPeracion == 'Nuevo'){

@@ -7,18 +7,32 @@ require_once ("config/conexion.php");
 
 if(isset($_GET['T'])){
     $Id_N =$_GET['T'];
+    $sql="SELECT Company,Id_n,Phone1,Addr1,succliente,Nivel,Terms FROM terceros where Id_n =$Id_N ";
+    $query = mysqli_query($con, $sql);
+    $h=0;
+    while($row=mysqli_fetch_array($query)){
+        $Tercero[$h]["Nombre"]= $row['Company'];
+        $Tercero[$h]["Phone1"]= $row['Phone1'];
+        $Tercero[$h]["Addr1"]= $row['Addr1'];
+        $Tercero[$h]["succliente"]= $row['succliente'];
+        $Tercero[$h]["Nivel"]= $row['Nivel'];
+        $Terms =  $row['Terms'];
+        $h=$h+1;
+    }
+
+
+
+
     $sql="SELECT count(*) FROM temp_pedidoe where Id_N ='$Id_N' ";
     $query = mysqli_query($con, $sql);
     $row=mysqli_fetch_array($query);
     if ($row[0]==0){
-      $sql="SELECT Terms FROM Terceros where Id_N ='$Id_N' ";
-      $query = mysqli_query($con, $sql);
-      $row=mysqli_fetch_array($query);
+    
 
       $sql =  "INSERT INTO temp_pedidoe
        (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Terms) VALUES
       
-       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0,".$row[0].");";
+       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0,'$Terms');";
         $query_update = mysqli_query($con,$sql);
         $Pedido='Nuevo Pedido';
     }else{
@@ -38,7 +52,7 @@ if(isset($_GET['T'])){
       $query = mysqli_query($con, $sql);
       $row=mysqli_fetch_array($query);
       $Estado =$row['Estado'];
-      if ($Estado=='Pendiente'){
+      if ($Estado=='Pendiente'||$Estado==''){
         $Estado='';
         $Botones ='';
       }else{
@@ -53,17 +67,7 @@ if(isset($_GET['T'])){
       }
       
     }
-    $sql="SELECT Company,Id_n,Phone1,Addr1,succliente,Nivel FROM terceros where Id_n =$Id_N ";
-    $query = mysqli_query($con, $sql);
-    $h=0;
-    while($row=mysqli_fetch_array($query)){
-        $Tercero[$h]["Nombre"]= $row['Company'];
-        $Tercero[$h]["Phone1"]= $row['Phone1'];
-        $Tercero[$h]["Addr1"]= $row['Addr1'];
-        $Tercero[$h]["succliente"]= $row['succliente'];
-        $Tercero[$h]["Nivel"]= $row['Nivel'];
-        $h=$h+1;
-    }
+    
 
 }
 

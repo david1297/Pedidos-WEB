@@ -21,10 +21,20 @@ $Iva = $Subtotal*($Porcentaje/100);
 	}else{
 		$Bonificado='N';
 	}
+	$sql="SELECT Estado FROM  temp_pedidod  where Id =$Id ";
+    $query = mysqli_query($con, $sql);
+    $row=mysqli_fetch_array($query);
+    if($row[0]=='Agregado'){
+		$sql =  "UPDATE temp_pedidod Set Cantidad=$Cantidad,Subtotal=$Subtotal,Iva=$Iva,Bonificado='$Bonificado',
+		COMENTARIO='$Comentario',Precio=$Precio where Id =$Id
+		and (Cantidad<>$Cantidad or Bonificado<>'$Bonificado' or COMENTARIO<>'$Comentario' );"; 
+    }else{
+		$sql =  "UPDATE temp_pedidod Set Cantidad=$Cantidad,Subtotal=$Subtotal,Iva=$Iva,Bonificado='$Bonificado',
+		COMENTARIO='$Comentario',Precio=$Precio, Estado = 'Modificado' where Id =$Id
+		and (Cantidad<>$Cantidad or Bonificado<>'$Bonificado' or COMENTARIO<>'$Comentario' );"; 
+    }
 
-	$sql =  "UPDATE temp_pedidod Set Cantidad=$Cantidad,Subtotal=$Subtotal,Iva=$Iva,Bonificado='$Bonificado',
-	COMENTARIO='$Comentario',Precio=$Precio, Estado = 'Modificado' where Id =$Id
-	and (Cantidad<>$Cantidad or Bonificado<>'$Bonificado' or COMENTARIO<>'$Comentario' );";
+	
 
 	$query_update = mysqli_query($con,$sql);
   

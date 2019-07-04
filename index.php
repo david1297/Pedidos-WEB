@@ -158,6 +158,7 @@ $sql="SELECT * FROM pedidoe where Fecha =CURDATE() and pedidoe.USERNAME ='".$_SE
     </div>
     <br><br>
   </div>
+  
  
   <footer class="page-footer blue darken-4">
     
@@ -175,6 +176,9 @@ $sql="SELECT * FROM pedidoe where Fecha =CURDATE() and pedidoe.USERNAME ='".$_SE
   <script src="js/init.js"></script>
 <script> $(document).ready(function(){
     $('.collapsible').collapsible();
+    $('select').formSelect();
+    $('.modal').modal();
+      $('.fixed-action-btn').floatingActionButton();
   });</script>
   </body>
 </html>

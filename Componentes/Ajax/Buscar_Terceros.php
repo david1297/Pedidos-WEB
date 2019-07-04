@@ -59,6 +59,7 @@
 					<th>N°</th>
 					<th>Total</th>
 					<th>Fecha</th>
+					<th>Estado</th>
 					<th class='text-right'>Editar</th>
 				</tr>
 				<?php
@@ -75,10 +76,11 @@
 						<td class="text-center"><?php echo $Numero; ?></td>
 						<td class="text-center">$<?php echo number_format($Total,2); ?></td>
 						<td class="text-center"><?php echo $Fecha; ?></td>
+						<td class="text-center"><?php echo $Estado; ?></td>
 								
 						<td class="text-right">
 						<?php
-						if ($Estado =='Pendiente'){
+						if ($Estado =='PENDIENTE'){
 							?>
 							<a href="#" class='btn btn-default green' title='Editar Campañas' onclick="EditarPedido('<?php echo $Tipo;?>',<?php echo $Numero;?>,'<?php echo $id_n;?>')"><i class="material-icons">keyboard_arrow_right</i></a> 
 							<?php

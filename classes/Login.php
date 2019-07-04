@@ -45,6 +45,7 @@ class Login
                         $_SESSION['LISTA_PRECIOS'] = $result_row->LISTA_PRECIOS;
                         $_SESSION['MODIFICAVEND'] = $result_row->MODIFICAVEND;
                         $_SESSION['user_login_status'] = 1;
+                        $_SESSION['Auditoria']='False';
                     } else {
                         $this->errors[] = "Usuario y/o contraseña no coinciden.";
                     }

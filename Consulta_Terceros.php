@@ -108,6 +108,7 @@ require_once ("config/conexion.php");
         })
       })*/
 
+      $('.modal').modal();
       $('#Load').hide();
       $('input.autocomplete').autocomplete({
         data: {
