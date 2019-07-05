@@ -29,8 +29,9 @@
 
 				<?php
 			}
-		
-			
+		?>
+			<a class="waves-effect waves-light btn green" onclick="Cartera('<?php echo $id_n;?>')"><i class="material-icons left">assessment</i>Cartera</a>
+		<?php	
 		
 		include 'pagination.php';
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;

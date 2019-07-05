@@ -52,7 +52,7 @@ if(isset($_GET['T'])){
       $query = mysqli_query($con, $sql);
       $row=mysqli_fetch_array($query);
       $Estado =$row['Estado'];
-      if ($Estado=='Pendiente'||$Estado==''){
+      if ($Estado=='PENDIENTE'||$Estado==''){
         $Estado='';
         $Botones ='';
       }else{
@@ -198,7 +198,7 @@ if(isset($_GET['T'])){
     <ul>
       <li><a class="btn-floating red darken-4" onclick="CancelarPedido();"><i class="material-icons">cancel</i></a></li>
       <li><a class="btn-floating green darken-1 <?php echo $Botones;?>" onclick="GuardarPedido();"><i class="material-icons">send</i></a></li>
-      <li><a class="btn-floating  blue-grey darken-4 <?php echo $Botones;?>" onclick="TraerNota();"><i class="material-icons">note_add</i></a></li>
+      <li><a class="btn-floating  blue-grey darken-4 <?php echo $Botones;?>" onclick="TraerNota();"><i class="material-icons">insert_comment</i></a></li>
       <li><a class="btn-floating red waves-effect waves-light btn <?php echo $Botones;?>"onclick=" $('#BuscarItem').modal('open');$('#Load1').hide();$('#BuscarItems').val('');$('.outer_div').html('<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>');$('#BuscarItems').focus();"><i class="material-icons">add</i></a></li>
     </ul>
   </div>

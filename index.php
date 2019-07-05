@@ -22,7 +22,7 @@ $sql="SELECT * FROM pedidoe where Fecha =CURDATE() and pedidoe.USERNAME ='".$_SE
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h2 class="header center blue-text"><?php echo $_SESSION['NOMBRE'];?></h2>
+      <h3 class="header center blue-text"><?php echo $_SESSION['NOMBRE'];?></h3>
       <div class="row center">
         <h5 class="header col s12 light">Total de Pedidos Del Dia</h5>
         <h5 class="header col s12 light">$ <?php echo number_format($Total,2);?></h5>

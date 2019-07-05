@@ -63,7 +63,7 @@ $Tarifa = $row['Tarifa'];
 
 
 $sql =  "INSERT INTO temp_pedidod (Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa,Estado) VALUES 
-	('$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$Comentario',$Precio,'$Bodega',$Tarifa,'-');";
+	('$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa,'-');";
 	$query_update = mysqli_query($con,$sql);
     if ($query_update) {
         $messages = "Los Datos Se Han Guardado Con Exito.";

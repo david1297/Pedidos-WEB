@@ -82,7 +82,14 @@ require_once ("config/conexion.php");
 <br>
 <br>
 <br>
- 
+  <div id="Cartera" class="modal"> 
+  &nbsp;<h5> &nbsp;Cartera:</h5>
+    <div id="CargarCartera"></div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" >Cerrar</a>
+     
+    </div>
+  </div>
   
  
   <footer class="page-footer blue darken-4">
@@ -135,6 +142,22 @@ require_once ("config/conexion.php");
     
       });
     });
+    function Cartera (Id_N){
+      $('#Cartera').modal('open');
+      ajax = null;
+      
+      ajax= $.ajax({
+        url:'Componentes/Ajax/Buscar_Cartera.php?Id_N='+Id_N,
+        beforeSend: function(objeto){
+          $("#CargarCartera").html('');
+        },
+        success:function(data){
+      
+          $("#CargarCartera").html(data).fadeIn('slow');
+                              
+        }
+      })
+    }
     function load(page){
       var Tercero = $("#BuscarTercero").val();
       var ModificaV = $("#ModificaV").val();
