@@ -110,7 +110,7 @@ if(isset($_GET['T'])){
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">location_on</i>
-              <select id="Addr1"  name="Addr1">
+              <select id="Addr1"  name="Addr1" onchange="CambiarDir('Addr1')">
                 <?php
                   for ($i = 0; $i < $h; $i++) {
                     if ($succliente == $Tercero[$i]['succliente']){
@@ -122,11 +122,11 @@ if(isset($_GET['T'])){
                   }
                 ?>
               </select>
-              <label for="Addr1">NBumero Telefonico</label>
+              <label for="Addr1">Direccion de Envio</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">phone_iphone</i>
-              <select id="Phone1"  name="Phone1">
+              <select id="Phone1"  name="Phone1" onchange="CambiarDir('Phone1')"disabled>
                 <?php
                   for ($i = 0; $i < $h; $i++) {
                     if ($succliente == $Tercero[$i]['succliente']){
@@ -138,7 +138,7 @@ if(isset($_GET['T'])){
                   }
                 ?>
               </select>
-              <label  for="Phone1">Direccion de Envio</label>
+              <label  for="Phone1">Numero Telefonico</label>
             </div>
           </div>
         </div>
@@ -312,11 +312,11 @@ if(isset($_GET['T'])){
           $h=0;
           while($row=mysqli_fetch_array($query)){
             if($h==0){
-              echo '"'.$row['DESCRIPCION'].'":null';
+              echo '"'.$row['ITEM'].' - '.$row['DESCRIPCION'].'":null';
               $h=1;
             }
             echo ',
-            "'.$row['DESCRIPCION'].'":null';
+            "'.$row['ITEM'].' - '.$row['DESCRIPCION'].'":null';
           }
           ?>
         
@@ -325,8 +325,30 @@ if(isset($_GET['T'])){
       });
 
     });
+function CambiarDir(Id){
+  
+  var Dir =$('#'+Id).val(); 
+  var Id_N = $("#Id_N").val();
+  var Index= $("#"+Id+" option:selected").index();
+
+    document.getElementById('Phone1').selectedIndex= Index;
+    $('#Phone1').click();
+ 
+  ajax = null;
+      ajax= $.ajax({
+      url:'Componentes/Ajax/CambiarDir.php?Dir='+Dir+'&Id_N='+Id_N,
+        beforeSend: function(objeto){
+          
+        },
+        success:function(data){
+        }
+      })
+}
+
     function load(page){
       var Item = $("#BuscarItems").val();
+      var palabras = Item.split(" ");
+			Item= palabras[0];
       var Nivel = $("#Nivel").val();
       var Id_N = $("#Id_N").val();
       var ajax;

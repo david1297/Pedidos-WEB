@@ -12,7 +12,7 @@
 		$sTable = "Items";
 		$sWhere = "where 1=1";
 		if ( $_GET['Item'] != "" ){
-				$sWhere.= " and  (DESCRIPCION = '$Item' )";	
+				$sWhere.= " and  (ITEM = '$Item' )";	
 		}
 		
 		$sWhere.="  order by DESCRIPCION";
