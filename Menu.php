@@ -30,7 +30,7 @@
         </div>
         <div class="input-field col s12">
           <i class="material-icons prefix">lock</i>
-          <input id="Clave" Name="Clave" type="password" class="validate">
+          <input id="Clave" Name="Clave" type="password" class="validate" onkeypress="Pulsar(event)">
           <label for="Clave">Clave</label>
         </div>
       </div>
@@ -43,6 +43,11 @@
     </div>
   </div>
   <script>
+  function Pulsar(e){
+    if (e.keyCode === 13 && !e.shiftKey) {
+      IngresoAuditoria();
+    }
+  }
   function IngresoAuditoria(){
     var Usuario = $("#Usuario").val();
     var Clave = $("#Clave").val();

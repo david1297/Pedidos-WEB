@@ -131,26 +131,35 @@ require_once ("config/conexion.php");
       
     });
     function load(page){
+
       var Tipo = $("#Tipo").val();
       var Numero = $("#Numero").val();
-      var ajax;
-      
-    
-        $("#loader").fadeIn('slow');
-      ajax = null;
-      
-      ajax= $.ajax({
-        url:'Componentes/Ajax/Buscar_Auditoria.php?Tipo='+Tipo+'&Numero='+Numero,
-        beforeSend: function(objeto){
-          $('#Load').show();
-        },
-        success:function(data){
-      
-          $(".outer_div").html(data).fadeIn('slow');
-          $('#Load').hide();  
-                              
+      if (Tipo ==''){
+        alert('Debe Definir el Tipo de Pedido a Consultar');
+      }else{
+        if (Numero==''){ 
+          alert('Debe Definir el Numero de Pedido a Consultar');     
+        }else{
+          var ajax;
+            $("#loader").fadeIn('slow');
+          ajax = null;
+          
+          ajax= $.ajax({
+            url:'Componentes/Ajax/Buscar_Auditoria.php?Tipo='+Tipo+'&Numero='+Numero,
+            beforeSend: function(objeto){
+              $('#Load').show();
+            },
+            success:function(data){
+          
+              $(".outer_div").html(data).fadeIn('slow');
+              $('#Load').hide();  
+                                  
+            }
+          })
         }
-      })
+      }
+
+     
 
     }
     

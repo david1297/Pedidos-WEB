@@ -111,7 +111,7 @@
 									<div class="row">
 										<span class="blue-text text-darken-4">PRECIO:&nbsp;</span>
 										<span class="black-text text-darken-4"><?php echo number_format($Precio); ?></span>
-										<input type="text" class="hide" name="Precio" value="<?php echo $Precio; ?>">
+										<input type="text" class="hide" name="Precio" Id="Precio" value="<?php echo $Precio; ?>">
 									</div>
 									<div class="row">
 									<p>
@@ -139,7 +139,15 @@
 					</div>
 					<script>
 					 $("#AgregarItem").submit(function( event ) { 
- 						var parametros = $(this).serialize();
+						 var Precio = $('#Precio').val();
+						 var Cantidad = $('#Cantidad').val();
+						if(Precio==0){
+							alert('El Precio No puede ser 0');
+						}else{
+							if(Cantidad==0 || Cantidad==''){
+								alert('la Cantidad No puede ser 0');
+							}else{
+								var parametros = $(this).serialize();
 	 					$.ajax({
 		  					type: "POST",
 							url: "Componentes/Ajax/AgregarItem.php",
@@ -151,8 +159,12 @@
 								   CargarProductos();
 							}
   						});
-  						event.preventDefault();
-					})
+  						
+					
+							}
+						}
+						event.preventDefault();
+					})	
 					</script>
 
 
