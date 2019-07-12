@@ -34,6 +34,8 @@ if ($Numero<>0){
 	$sql=mysqli_query($con, "select LAST_INSERT_ID(Numero) as last,CURDATE() as Fecha,curTime() as Hora from pedidoe where Tipo= '$Tipo' order by Numero desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);
 	$Numero_PE=$rw['last']+1;
+	$sql=mysqli_query($con, "select CURDATE() as Fecha,curTime() as Hora  ");
+	$rw=mysqli_fetch_array($sql);
 	$Fecha = $rw['Fecha'];
 	$Hora = $rw['Hora'];
 	$USERNAME = $_SESSION['USERNAME'];
