@@ -1,6 +1,6 @@
 <?php  session_start();
 if ($_SESSION['user_login_status'] <> 1) {
-  header("location: Login.php");
+  header("location: login.php");
 } 
 require_once ("config/db.php");
 require_once ("config/conexion.php");

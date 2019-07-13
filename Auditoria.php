@@ -1,6 +1,6 @@
 <?php  session_start();
 if ($_SESSION['user_login_status'] <> 1) {
-  header("location: Login.php");
+  header("location: login.php");
 } 
 if ($_SESSION['Auditoria']=='False') {
   header("location: index.php");
