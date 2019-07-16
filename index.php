@@ -61,9 +61,9 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
               <table class="highlight">
                 <tbody>
                   <?php
-                  $sql1="SELECT ITMES.Item,ITMES.Descripcion,sum(cantidad) as Cantidad,sum(PEDIDOD.Subtotal+PEDIDOD.Iva)Total FROM PEDIDOE 
+                  $sql1="SELECT ITEMS.Item,ITEMS.Descripcion,sum(cantidad) as Cantidad,sum(PEDIDOD.Subtotal+PEDIDOD.Iva)Total FROM PEDIDOE 
                   inner join PEDIDOD on  PEDIDOE.tipo = PEDIDOD.tipo and PEDIDOE.numero = PEDIDOD.Numero
-                  inner join ITMES on PEDIDOD.item= ITMES.item
+                  inner join ITEMS on PEDIDOD.item= ITEMS.item
                   where PEDIDOE.Tipo ='$Tipo' and PEDIDOE.Numero=$Numero and PEDIDOD.Bonificado = 'N'
                   group by Item;";
                   $query1 = mysqli_query($con, $sql1);
