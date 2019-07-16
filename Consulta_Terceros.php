@@ -124,7 +124,7 @@ require_once ("config/conexion.php");
           if ($_SESSION['MODIFICAVEND']=='N'){
             $sql.="where id_vend=".$_SESSION['IDVEND']."";
           }
-          $sql.=" group by id_n,Company ;";
+          $sql.=" group by id_n,Company,COMPANY_EXTENDIDO ;";
           
           $query = mysqli_query($con, $sql);
           $h=0;

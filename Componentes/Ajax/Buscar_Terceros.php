@@ -6,7 +6,7 @@
 	if($action == 'ajax'){
 		$Tercero = mysqli_real_escape_string($con,(strip_tags($_REQUEST['Tercero'], ENT_QUOTES)));
 		$ModificaV = $_SESSION['MODIFICAVEND'];
-		$sql="SELECT id_n,company FROM  terceros where  (company like '%$Tercero%' or id_n like '%$Tercero%') group by  id_n,company order by company";
+		$sql="SELECT id_n,company FROM  TERCEROS where  (company like '%$Tercero%' or id_n like '%$Tercero%') group by  id_n,company order by company";
 		$query = mysqli_query($con, $sql);
 		$row=mysqli_fetch_array($query);
 			$id_n=$row['id_n'];
@@ -18,7 +18,7 @@
 			<a class="waves-effect waves-light btn green" onclick="NuevoPedido('<?php echo $id_n;?>')"><i class="material-icons left">add</i>Nuevo</a>
 			
 			<?php
-			$sql1="SELECT count(*) as Cantidad FROM  temp_pedidod where Id_N = '$id_n' ";
+			$sql1="SELECT count(*) as Cantidad FROM TEMP_PEDIDOD where Id_N = '$id_n' ";
 			$query1 = mysqli_query($con, $sql1);
 			$row1=mysqli_fetch_array($query1);
 			if ($row1[0]<>0 ){
