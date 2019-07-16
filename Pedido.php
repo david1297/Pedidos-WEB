@@ -7,7 +7,7 @@ require_once ("config/conexion.php");
 
 if(isset($_GET['T'])){
     $Id_N =$_GET['T'];
-    $sql="SELECT Company,Id_n,Phone1,Addr1,succliente,Nivel,Terms FROM terceros where Id_n =$Id_N ";
+    $sql="SELECT Company,Id_n,Phone1,Addr1,succliente,Nivel,Terms FROM TERCEROS where Id_n =$Id_N ";
     $query = mysqli_query($con, $sql);
     $h=0;
     while($row=mysqli_fetch_array($query)){
@@ -23,20 +23,20 @@ if(isset($_GET['T'])){
 
 
 
-    $sql="SELECT count(*) FROM temp_pedidoe where Id_N ='$Id_N' ";
+    $sql="SELECT count(*) FROM TEMP_PEDIDOE where Id_N ='$Id_N' ";
     $query = mysqli_query($con, $sql);
     $row=mysqli_fetch_array($query);
     if ($row[0]==0){
     
 
-      $sql =  "INSERT INTO temp_pedidoe
+      $sql =  "INSERT INTO TEMP_PEDIDOE
        (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Terms) VALUES
       
        ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0,'$Terms');";
         $query_update = mysqli_query($con,$sql);
         $Pedido='Nuevo Pedido';
     }else{
-      $sql="SELECT * FROM temp_pedidoe where Id_N =$Id_N ";
+      $sql="SELECT * FROM TEMP_PEDIDOE where Id_N =$Id_N ";
       $query = mysqli_query($con, $sql);
       $row=mysqli_fetch_array($query);
       $Tipo =$row['Tipo'];
@@ -48,7 +48,7 @@ if(isset($_GET['T'])){
       $Tipo =$row['Tipo'];
       $Numero =$row['Numero'];
 
-      $sql="SELECT Estado FROM pedidoe where Tipo ='$Tipo' and Numero = $Numero ";
+      $sql="SELECT Estado FROM PEDIDOE where Tipo ='$Tipo' and Numero = $Numero ";
       $query = mysqli_query($con, $sql);
       $row=mysqli_fetch_array($query);
       $Estado =$row['Estado'];
@@ -304,7 +304,7 @@ if(isset($_GET['T'])){
       $('input.autocomplete').autocomplete({
         data: {
           <?PHP
-          $sql="SELECT ITEM,DESCRIPCION FROM items ";
+          $sql="SELECT ITEM,DESCRIPCION FROM ITEMS ";
          
           $sql.=" group by DESCRIPCION ;";
           

@@ -120,7 +120,7 @@ require_once ("config/conexion.php");
       $('input.autocomplete').autocomplete({
         data: {
           <?PHP
-          $sql="SELECT id_n,Company,COMPANY_EXTENDIDO FROM terceros ";
+          $sql="SELECT id_n,Company,COMPANY_EXTENDIDO FROM TERCEROS ";
           if ($_SESSION['MODIFICAVEND']=='N'){
             $sql.="where id_vend=".$_SESSION['IDVEND']."";
           }
