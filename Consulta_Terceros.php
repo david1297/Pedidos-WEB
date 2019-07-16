@@ -207,7 +207,7 @@ require_once ("config/conexion.php");
           beforeSend: function(objeto){
           },
           success:function(data){
-           location.href='pedido.php?T='+Id_N;
+           location.href='Pedido.php?T='+Id_N;
           }
           })
       
