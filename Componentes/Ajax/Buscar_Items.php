@@ -9,7 +9,7 @@
 		$Id_N = mysqli_real_escape_string($con,(strip_tags($_REQUEST['Id_N'], ENT_QUOTES)));
 		
 
-		$sTable = "Items";
+		$sTable = "ITEMS";
 		$sWhere = "where 1=1";
 		if ( $_GET['Item'] != "" ){
 				$sWhere.= " and  (ITEM = '$Item' )";	

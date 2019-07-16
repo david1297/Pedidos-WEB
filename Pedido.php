@@ -306,7 +306,7 @@ if(isset($_GET['T'])){
           <?PHP
           $sql="SELECT ITEM,DESCRIPCION FROM ITEMS ";
          
-          $sql.=" group by DESCRIPCION ;";
+          $sql.=" group by ITEM,DESCRIPCION ;";
           
           $query = mysqli_query($con, $sql);
           $h=0;

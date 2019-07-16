@@ -8,7 +8,7 @@ $Cantidad=$_POST['Cantidad'];
 $Comentario=$_POST['Comentario'];
 $Id_N=$_POST['Id_N'];
 $Subtotal = $Cantidad * $Precio;
-$sql="SELECT PORCENTAJE,IVA FROM items where ITEM ='$Item' ";
+$sql="SELECT PORCENTAJE,IVA FROM ITEMS where ITEM ='$Item' ";
 $query = mysqli_query($con, $sql);
 $row=mysqli_fetch_array($query);
 $Porcentaje = $row['PORCENTAJE'];
@@ -23,7 +23,7 @@ $Iva = $Subtotal*($Porcentaje/100);
 		$Bonificado='N';
 	}
 
-	$sql =  "INSERT INTO temp_pedidod (Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa,Estado) VALUES 
+	$sql =  "INSERT INTO TEMP_PEDIDOD (Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa,Estado) VALUES 
 	('$Id_N','$Item',$Cantidad,$Subtotal,$Iva,0,'$Bonificado','$Comentario',$Precio,'".$_SESSION['BODEGA']."',$Tarifa,'Agregado');";
 	$query_update = mysqli_query($con,$sql);
     if ($query_update) {
