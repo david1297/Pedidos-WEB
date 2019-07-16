@@ -194,7 +194,7 @@ require_once ("config/conexion.php");
       
           },
           success:function(data){
-            location.href='pedido.php?T='+Id_N;
+            location.href='Pedido.php?T='+Id_N;
             
           }
           })
