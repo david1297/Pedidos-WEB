@@ -2,7 +2,7 @@
 	require_once ("../../config/db.php");
 	require_once ("../../config/conexion.php");
     $Id_N = $_GET['Id_N'];
-      $sql="SELECT * FROM temp_pedidod where Id_N ='$Id_N' ";
+      $sql="SELECT * FROM TEMP_PEDIDOD where Id_N ='$Id_N' ";
       $query = mysqli_query($con, $sql);
       $h=1;
       $Total=0;
@@ -19,7 +19,7 @@
         }
        
       }
-      $sql =  "UPDATE temp_pedidoe Set Subtotal=$SubTotal,Iva=$Iva,BONOTOTAL=$Bono  where  Id_N ='$Id_N';";
+      $sql =  "UPDATE TEMP_PEDIDOE Set Subtotal=$SubTotal,Iva=$Iva,BONOTOTAL=$Bono  where  Id_N ='$Id_N';";
       $query_update = mysqli_query($con,$sql);
       if ($query_update) {
           $messages = "Los Datos Se Han Guardado Con Exito.";

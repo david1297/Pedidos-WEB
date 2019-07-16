@@ -2,7 +2,7 @@
 	require_once ("../../config/db.php");
 	require_once ("../../config/conexion.php");
 $Id_N = $_GET['Id_N'];
-      $sql="SELECT * FROM temp_pedidod where Id_N ='$Id_N' and Estado <>'Eliminado' ";
+      $sql="SELECT * FROM TEMP_PEDIDOD where Id_N ='$Id_N' and Estado <>'Eliminado' ";
       $query = mysqli_query($con, $sql);
       $h=1;
       while($row=mysqli_fetch_array($query)){
@@ -14,7 +14,7 @@ $Id_N = $_GET['Id_N'];
           $Id= $row['Id'];
           $Bonificado= $row['Bonificado'];
           $COMENTARIO= $row['COMENTARIO'];
-          $sql1="SELECT DESCRIPCION FROM Items where ITem ='$Item' ";
+          $sql1="SELECT DESCRIPCION FROM ITEMS where ITem ='$Item' ";
           $query1 = mysqli_query($con, $sql1);
           $row1=mysqli_fetch_array($query1);
           $Descripcion = $row1['DESCRIPCION'];

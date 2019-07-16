@@ -4,7 +4,7 @@
 	require_once ("../../config/conexion.php");
 	$Id_N = mysqli_real_escape_string($con,(strip_tags($_REQUEST['Id_N'], ENT_QUOTES)));
 
-	$sql="SELECT * FROM  Cartera where  Id_N = '$Id_N'";
+	$sql="SELECT * FROM  CARTERA where  Id_N = '$Id_N'";
 	$query = mysqli_query($con, $sql);
 	?>
 	<div class="row">

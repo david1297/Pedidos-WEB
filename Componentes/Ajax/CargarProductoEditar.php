@@ -8,7 +8,7 @@
 		
 
 		
-		$sql="SELECT * FROM  temp_pedidod where Id= $Id ";
+		$sql="SELECT * FROM  TEMP_PEDIDOD where Id= $Id ";
 		$query = mysqli_query($con, $sql);
 				while ($row=mysqli_fetch_array($query)){
                         $Item=$row['Item'];
@@ -17,7 +17,7 @@
                         $Cantidad=$row['Cantidad'];
                         $COMENTARIO=$row['COMENTARIO'];
                         
-                        $sql1="SELECT DESCRIPCION FROM  items where ITem= $Item ";
+                        $sql1="SELECT DESCRIPCION FROM  ITEMS where ITem= $Item ";
 		                $query1 = mysqli_query($con, $sql1);
                         $row1=mysqli_fetch_array($query1);
                         $Descipcion=$row1['DESCRIPCION'];

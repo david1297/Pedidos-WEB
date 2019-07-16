@@ -8,7 +8,7 @@
 		
 
 		
-		$sql="SELECT Comentario FROM  temp_pedidoe where Id_N= $Id_N ";
+		$sql="SELECT Comentario FROM  TEMP_PEDIDOE where Id_N= $Id_N ";
 		$query = mysqli_query($con, $sql);
 		$row=mysqli_fetch_array($query);
                         

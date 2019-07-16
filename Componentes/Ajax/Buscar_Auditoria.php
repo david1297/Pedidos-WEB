@@ -27,7 +27,7 @@
           </thead>
           <tbody>
             <?php
-            $sql="SELECT * FROM  auditoria_pedidoe  where Tipo ='$Tipo' and Numero = $Numero  order by fecha desc,Hora desc   ";
+            $sql="SELECT * FROM  AUDITORIA_PEDIDOE  where Tipo ='$Tipo' and Numero = $Numero  order by fecha desc,Hora desc   ";
             $query = mysqli_query($con, $sql);
             while($row=mysqli_fetch_array($query)){
               if ($row['Operacion']=='Creacion'){
@@ -83,10 +83,10 @@
           </thead>
           <tbody>
             <?php
-            $sql="SELECT Fecha,Hora,Operacion,USERNAME,items.Item,Cantidad,COMENTARIO,Subtotal,Tarifa,auditoria_pedidod.Iva,Descuento,Bonificado,
-            items.DESCRIPCION
-             FROM  auditoria_pedidod  
-            inner join items on items.item = auditoria_pedidod.item
+            $sql="SELECT Fecha,Hora,Operacion,USERNAME,ITEMS.Item,Cantidad,COMENTARIO,Subtotal,Tarifa,AUDITORIA_PEDIDOD.Iva,Descuento,Bonificado,
+            ITEMS.DESCRIPCION
+             FROM  AUDITORIA_PEDIDOD  
+            inner join ITEMS on ITEMS.item = AUDITORIA_PEDIDOD.item
             where Tipo ='$Tipo' and Numero = $Numero order by fecha desc,Hora desc  ";
             $query = mysqli_query($con, $sql);
             while($row=mysqli_fetch_array($query)){

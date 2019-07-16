@@ -6,10 +6,10 @@ $Id_N=$_GET['Id_N'];
 $Tipo=$_GET['Tipo'];
 $Numero=$_GET['Numero'];
 
-$sql =  "DELETE FROM  temp_pedidoe where Id_N =$Id_N;";
+$sql =  "DELETE FROM  TEMP_PEDIDOE  where Id_N =$Id_N;";
 $query_update = mysqli_query($con,$sql);
 if ($query_update) {
-	$sql =  "DELETE FROM  temp_pedidod where Id_N =$Id_N and id<>0;";
+	$sql =  "DELETE FROM  TEMP_PEDIDOD where Id_N =$Id_N and id<>0;";
 	$query_update = mysqli_query($con,$sql);
 	if ($query_update) {
 		$messages = "Los Datos Se Han Guardado Con Exito.";
@@ -17,7 +17,7 @@ if ($query_update) {
 } else {
 	$errors = "Lo sentimos , el registro falló. Por favor, regrese y vuelva a intentarlo.<br>";
 }
-$sql="SELECT * FROM  pedidoe  where Tipo ='$Tipo' and Numero = $Numero ";
+$sql="SELECT * FROM  PEDIDOE  where Tipo ='$Tipo' and Numero = $Numero ";
 $query = mysqli_query($con, $sql);
 $row=mysqli_fetch_array($query);
 $Tipo = $row['Tipo'];
@@ -37,7 +37,7 @@ $Terms = $row['Terms'];
 
 
 
-	$sql =  "INSERT INTO temp_pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,USERNAME,IDVEND,BONOTOTAL,Terms) VALUES 
+	$sql =  "INSERT INTO TEMP_PEDIDOE (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,USERNAME,IDVEND,BONOTOTAL,Terms) VALUES 
 	('$Tipo',$Numero,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$USERNAME',$IDVEND,$BONOTOTAL,'$Terms');";
 	$query_update = mysqli_query($con,$sql);
     if ($query_update) {
@@ -47,7 +47,7 @@ $Terms = $row['Terms'];
 	}
 	 echo $sql;
 
-	 $sql="SELECT * FROM pedidod  where Tipo ='$Tipo' and Numero = $Numero ";
+	 $sql="SELECT * FROM PEDIDOD  where Tipo ='$Tipo' and Numero = $Numero ";
 $query = mysqli_query($con, $sql);
 while($row=mysqli_fetch_array($query)){
 $Item = $row['Item'];
@@ -62,7 +62,7 @@ $Bodega = $row['Bodega'];
 $Tarifa = $row['Tarifa'];
 
 
-$sql =  "INSERT INTO temp_pedidod (Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa,Estado) VALUES 
+$sql =  "INSERT INTO TEMP_PEDIDOD (Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa,Estado) VALUES 
 	('$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa,'-');";
 	$query_update = mysqli_query($con,$sql);
     if ($query_update) {

@@ -5,7 +5,7 @@ require_once ("../../config/conexion.php");
 $Usuario=$_GET['Usuario'];
 $Clave=$_GET['Clave'];
 
-$sql="SELECT count(*) FROM administradores where Usuario ='$Usuario' and  Clave ='$Clave'";
+$sql="SELECT count(*) FROM ADMINISTRADORES where Usuario ='$Usuario' and  Clave ='$Clave'";
 $query = mysqli_query($con, $sql);
 $row=mysqli_fetch_array($query);
 if($row[0]>=1 ){

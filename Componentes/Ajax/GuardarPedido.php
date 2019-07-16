@@ -6,7 +6,7 @@ require_once ("../../classes/Auditoria.php");
 
 $Id_N=$_GET['Id_N'];
 
-$sql="SELECT * FROM temp_pedidoe where Id_N ='$Id_N' ";
+$sql="SELECT * FROM TEMP_PEDIDOE where Id_N ='$Id_N' ";
 $query = mysqli_query($con, $sql);
 $row=mysqli_fetch_array($query);
 $Tipo = $row['Tipo'];
@@ -23,7 +23,7 @@ $Terms = $row['Terms'];
 
 if ($Numero<>0){
 	$Numero_PE = $Numero;	
-	$sql=mysqli_query($con, "select Fecha,Hora,USERNAME,IDVEND from pedidoe where Tipo= '$Tipo' and Numero = $Numero_PE  ");
+	$sql=mysqli_query($con, "select Fecha,Hora,USERNAME,IDVEND from PEDIDOE where Tipo= '$Tipo' and Numero = $Numero_PE  ");
 	$rw=mysqli_fetch_array($sql);
 	$Fecha = $rw['Fecha'];
 	$Hora = $rw['Hora'];
@@ -31,7 +31,7 @@ if ($Numero<>0){
 	$IDVEND = $rw['IDVEND'];
 	$OPeracion = 'Editar';
 }else{
-	$sql=mysqli_query($con, "select LAST_INSERT_ID(Numero) as last,CURDATE() as Fecha,curTime() as Hora from pedidoe where Tipo= '$Tipo' order by Numero desc limit 0,1 ");
+	$sql=mysqli_query($con, "select LAST_INSERT_ID(Numero) as last,CURDATE() as Fecha,curTime() as Hora from PEDIDOE where Tipo= '$Tipo' order by Numero desc limit 0,1 ");
 	$rw=mysqli_fetch_array($sql);
 	$Numero_PE=$rw['last']+1;
 	$sql=mysqli_query($con, "select CURDATE() as Fecha,curTime() as Hora  ");
@@ -45,14 +45,14 @@ if ($Numero<>0){
 
 if($OPeracion == 'Editar'){
 	EditarE($Tipo,$Numero_PE,$Id_N);
-	$sql =  "DELETE FROM  pedidoe where Numero =$Numero_PE and Tipo ='$Tipo';";
+	$sql =  "DELETE FROM  PEDIDOE where Numero =$Numero_PE and Tipo ='$Tipo';";
 	$query_update = mysqli_query($con,$sql);
 	EditarD($Tipo,$Numero_PE,$Id_N);
-	$sql =  "DELETE FROM  pedidod where Numero =$Numero_PE and Tipo ='$Tipo';";
+	$sql =  "DELETE FROM  PEDIDOD where Numero =$Numero_PE and Tipo ='$Tipo';";
 	$query_update = mysqli_query($con,$sql);	
 }
 
-$sql =  "INSERT INTO pedidoe (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,Fecha,Hora,USERNAME,IDVEND,SINC,Estado,BONOTOTAL,Terms) VALUES 
+$sql =  "INSERT INTO PEDIDOE (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,Fecha,Hora,USERNAME,IDVEND,SINC,Estado,BONOTOTAL,Terms) VALUES 
 ('$Tipo',$Numero_PE,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$Fecha','$Hora','$USERNAME',$IDVEND,'N','PENDIENTE',$BONOTOTAL,'$Terms');";
 $query_update = mysqli_query($con,$sql);
 
@@ -60,7 +60,7 @@ if ($OPeracion == 'Nuevo'){
 	NuevoE($Tipo,$Numero_PE);
 }	
 
-$sql="SELECT * FROM temp_pedidod where Id_N ='$Id_N' and Estado <> 'Eliminado' ";
+$sql="SELECT * FROM TEMP_PEDIDOD where Id_N ='$Id_N' and Estado <> 'Eliminado' ";
 $query = mysqli_query($con, $sql);
 while($row=mysqli_fetch_array($query)){
 	$Item = $row['Item'];
@@ -74,7 +74,7 @@ while($row=mysqli_fetch_array($query)){
 	$Bodega = $row['Bodega'];
 	$Tarifa = $row['Tarifa'];
 
-	$sql =  "INSERT INTO pedidod (Tipo,Numero,Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa) VALUES 
+	$sql =  "INSERT INTO PEDIDOD (Tipo,Numero,Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa) VALUES 
 	('$Tipo',$Numero_PE,'$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa);";
 	$query_update = mysqli_query($con,$sql);
 }
@@ -83,9 +83,9 @@ if ($OPeracion == 'Nuevo'){
 }	
 
 
-$sql =  "DELETE FROM  temp_pedidoe where Id_N =$Id_N;";
+$sql =  "DELETE FROM  TEMP_PEDIDOE where Id_N =$Id_N;";
 $query_update = mysqli_query($con,$sql);
-$sql =  "DELETE FROM  temp_pedidod where Id_N =$Id_N and id<>0;";
+$sql =  "DELETE FROM  TEMP_PEDIDOD where Id_N =$Id_N and id<>0;";
 $query_update = mysqli_query($con,$sql);
 ?>
 
