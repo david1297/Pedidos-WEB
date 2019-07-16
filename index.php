@@ -5,7 +5,7 @@ if ($_SESSION['user_login_status'] <> 1) {
 require_once ("config/db.php");
 require_once ("config/conexion.php");
 $Total =0;
-$sql="SELECT * FROM pedidoe where Fecha =CURDATE() and pedidoe.USERNAME ='".$_SESSION['USERNAME']."'";
+$sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SESSION['USERNAME']."'";
       $query = mysqli_query($con, $sql);
       while($row=mysqli_fetch_array($query)){
         $Total =$Total+ $row['Subtotal'] + $row['Iva'];
@@ -36,10 +36,10 @@ $sql="SELECT * FROM pedidoe where Fecha =CURDATE() and pedidoe.USERNAME ='".$_SE
       </div>
       <ul class="collapsible">
         <?php
-        $sql="SELECT Tipo,Numero,Subtotal+Iva as Total ,Terceros.company FROM pedidoe 
-        inner join Terceros on  Terceros.Id_N = pedidoe.Id_N 
-        where pedidoe.Fecha =CURDATE() and pedidoe.USERNAME ='".$_SESSION['USERNAME']."'
-        GROUP BY Tipo,Numero,total ,Terceros.company ";
+        $sql="SELECT Tipo,Numero,Subtotal+Iva as Total ,TERCEROS.company FROM PEDIDOE 
+        inner join TERCEROS on  TERCEROS.Id_N = PEDIDOE.Id_N 
+        where PEDIDOE.Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SESSION['USERNAME']."'
+        GROUP BY Tipo,Numero,total ,TERCEROS.company ";
         $SumCant= 0;
         $SumTotal= 0;
         $query = mysqli_query($con, $sql);
@@ -61,10 +61,10 @@ $sql="SELECT * FROM pedidoe where Fecha =CURDATE() and pedidoe.USERNAME ='".$_SE
               <table class="highlight">
                 <tbody>
                   <?php
-                  $sql1="SELECT Items.Item,Items.Descripcion,sum(cantidad) as Cantidad,sum(pedidod.Subtotal+pedidod.Iva)Total FROM pedidoe 
-                  inner join pedidod on  pedidoe.tipo = pedidod.tipo and pedidoe.numero = pedidod.Numero
-                  inner join items on pedidod.item= Items.item
-                  where pedidoe.Tipo ='$Tipo' and pedidoe.Numero=$Numero and pedidod.Bonificado = 'N'
+                  $sql1="SELECT ITMES.Item,ITMES.Descripcion,sum(cantidad) as Cantidad,sum(PEDIDOD.Subtotal+PEDIDOD.Iva)Total FROM PEDIDOE 
+                  inner join PEDIDOD on  PEDIDOE.tipo = PEDIDOD.tipo and PEDIDOE.numero = PEDIDOD.Numero
+                  inner join ITMES on PEDIDOD.item= ITMES.item
+                  where PEDIDOE.Tipo ='$Tipo' and PEDIDOE.Numero=$Numero and PEDIDOD.Bonificado = 'N'
                   group by Item;";
                   $query1 = mysqli_query($con, $sql1);
                   while($row1=mysqli_fetch_array($query1)){
