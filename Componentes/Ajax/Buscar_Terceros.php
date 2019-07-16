@@ -12,7 +12,7 @@
 			$id_n=$row['id_n'];
 			$Nombre=$row['company'];
 
-		$sTable = "pedidoe";
+		$sTable = "PEDIDOE";
 		$sWhere = "where  Id_N ='$id_n'";
 		?>
 			<a class="waves-effect waves-light btn green" onclick="NuevoPedido('<?php echo $id_n;?>')"><i class="material-icons left">add</i>Nuevo</a>
