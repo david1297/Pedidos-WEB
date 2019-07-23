@@ -27,7 +27,7 @@ class Login
             if (!$this->db_connection->connect_errno) {
                 $Usuario = $this->db_connection->real_escape_string($_POST['Usuario']);
                 $sql = "select USERNAME,CLAVE,USUARIOFACTURA,nombres.IDVEND,vendedor.NOMBRE,
-                fatipdoc.MODIFICAVEND,fatipdoc.BODEGA,fatipdoc.LISTA_PRECIOS,fatipdoc.TIPO_PE
+                fatipdoc.MODIFICAVEND,fatipdoc.BODEGA,fatipdoc.LISTA_PRECIOS,fatipdoc.TIPO_PE,fatipdoc.PMDESCUENTO
                 from nombres
                 inner join vendedor on nombres.IDVEND = vendedor.IDVEND
                 inner join fatipdoc on fatipdoc.ID_USUARIO = nombres.USUARIOFACTURA
@@ -41,6 +41,7 @@ class Login
                         $_SESSION['USUARIOFACTURA'] = $result_row->USUARIOFACTURA;
                         $_SESSION['IDVEND'] = $result_row->IDVEND;
                         $_SESSION['TIPO_PE'] = $result_row->TIPO_PE;
+                        $_SESSION['PMDESCUENTO'] = $result_row->PMDESCUENTO;
                         $_SESSION['BODEGA'] = $result_row->BODEGA;
                         $_SESSION['LISTA_PRECIOS'] = $result_row->LISTA_PRECIOS;
                         $_SESSION['MODIFICAVEND'] = $result_row->MODIFICAVEND;

@@ -89,6 +89,17 @@
 								
 						}	
 					}
+					$Des=0;
+					
+					if ($_SESSION['PMDESCUENTO'] =='S'){
+						$QTercero="SELECT Descuento FROM TERCEROS WHERE id_n = '$Id_N'  ";
+						$QRest = mysqli_query($con, $QTercero);
+						$Resp=mysqli_fetch_array($QRest);
+						if ($Resp[0] <> 0){
+							$Des=($Precio*$Resp[0]/100) ;
+							$Precio = $Precio- ($Precio*$Resp[0]/100);	
+						}
+					}
 
 						$Item=$row['ITEM'];
 						$Descipcion=$row['DESCRIPCION'];
@@ -109,8 +120,13 @@
 										<span class="black-text text-darken-4"><?php echo $Descipcion; ?></span>
 									</div>
 									<div class="row">
+										<span class="blue-text text-darken-4">DESCUENTO:&nbsp;</span>
+										<span class="black-text text-darken-4"><?php echo number_format($Resp[0],2); ?>%</span>
+										<input type="text" class="hide" name="Descuento" Id="Descuento" value="<?php echo $Des; ?>">
+									</div>
+									<div class="row">
 										<span class="blue-text text-darken-4">PRECIO:&nbsp;</span>
-										<span class="black-text text-darken-4"><?php echo number_format($Precio); ?></span>
+										<span class="black-text text-darken-4"><?php echo number_format($Precio,2); ?></span>
 										<input type="text" class="hide" name="Precio" Id="Precio" value="<?php echo $Precio; ?>">
 									</div>
 									<div class="row">
