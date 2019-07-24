@@ -9,9 +9,11 @@
       $SubTotal=0;
       $Iva=0;
       $Bono=0;
+      $Descuento=0;
       while($row=mysqli_fetch_array($query)){
         if ($row['Bonificado']=='N'){
-          $Total =$Total+ $row['Subtotal'] + $row['Iva'];
+          $Descuento=($row['Subtotal']*$row['Descuento']/100);
+          $Total =$Total+ $row['Subtotal'] + $row['Iva']-$Descuento;
           $SubTotal =$SubTotal+ $row['Subtotal'];
           $Iva =$Iva + $row['Iva'];
         }else{
@@ -19,7 +21,7 @@
         }
        
       }
-      $sql =  "UPDATE TEMP_PEDIDOE Set Subtotal=$SubTotal,Iva=$Iva,BONOTOTAL=$Bono  where  Id_N ='$Id_N';";
+      $sql =  "UPDATE TEMP_PEDIDOE Set Subtotal=$SubTotal,Iva=$Iva,BONOTOTAL=$Bono,Descuento=$Descuento  where  Id_N ='$Id_N';";
       $query_update = mysqli_query($con,$sql);
       if ($query_update) {
           $messages = "Los Datos Se Han Guardado Con Exito.";

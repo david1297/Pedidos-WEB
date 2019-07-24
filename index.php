@@ -8,7 +8,7 @@ $Total =0;
 $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SESSION['USERNAME']."'";
       $query = mysqli_query($con, $sql);
       while($row=mysqli_fetch_array($query)){
-        $Total =$Total+ $row['Subtotal'] + $row['Iva'];
+        $Total =$Total+ $row['Subtotal'] + $row['Iva']-$row['Descuento'];
       }
 ?>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
       </div>
       <ul class="collapsible">
         <?php
-        $sql="SELECT Tipo,Numero,Subtotal+Iva as Total ,TERCEROS.company FROM PEDIDOE 
+        $sql="SELECT Tipo,Numero,(Subtotal+Iva-PEDIDOE.Descuento) as Total ,TERCEROS.company FROM PEDIDOE 
         inner join TERCEROS on  TERCEROS.Id_N = PEDIDOE.Id_N 
         where PEDIDOE.Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SESSION['USERNAME']."'
         GROUP BY Tipo,Numero,total ,TERCEROS.company ";
@@ -61,7 +61,7 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
               <table class="highlight">
                 <tbody>
                   <?php
-                  $sql1="SELECT ITEMS.Item,ITEMS.Descripcion,sum(cantidad) as Cantidad,sum(PEDIDOD.Subtotal+PEDIDOD.Iva)Total FROM PEDIDOE 
+                  $sql1="SELECT ITEMS.Item,ITEMS.Descripcion,sum(cantidad) as Cantidad,sum(PEDIDOD.Subtotal+PEDIDOD.Iva-(PEDIDOD.Descuento*PEDIDOD.Subtotal/100))Total FROM PEDIDOE 
                   inner join PEDIDOD on  PEDIDOE.tipo = PEDIDOD.tipo and PEDIDOE.numero = PEDIDOD.Numero
                   inner join ITEMS on PEDIDOD.item= ITEMS.item
                   where PEDIDOE.Tipo ='$Tipo' and PEDIDOE.Numero=$Numero and PEDIDOD.Bonificado = 'N'

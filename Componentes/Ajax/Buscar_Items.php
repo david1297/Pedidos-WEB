@@ -96,8 +96,8 @@
 						$QRest = mysqli_query($con, $QTercero);
 						$Resp=mysqli_fetch_array($QRest);
 						if ($Resp[0] <> 0){
-							$Des=($Precio*$Resp[0]/100) ;
-							$Precio = $Precio- ($Precio*$Resp[0]/100);	
+							$Des=$Resp[0];
+							//$Precio = $Precio- ($Precio*$Resp[0]/100);	
 						}
 					}
 
@@ -121,7 +121,7 @@
 									</div>
 									<div class="row">
 										<span class="blue-text text-darken-4">DESCUENTO:&nbsp;</span>
-										<span class="black-text text-darken-4"><?php echo number_format($Resp[0],2); ?>%</span>
+										<span class="black-text text-darken-4"><?php echo number_format($Des,2); ?>%</span>
 										<input type="text" class="hide" name="Descuento" Id="Descuento" value="<?php echo $Des; ?>">
 									</div>
 									<div class="row">

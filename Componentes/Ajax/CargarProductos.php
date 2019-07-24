@@ -39,8 +39,9 @@ $Id_N = $_GET['Id_N'];
                   <span class="blue-text text-darken-4">ITEM:&nbsp;</span><span class="black-text text-darken-4"><?php echo $Item;?></span><br>
                   <span class="blue-text text-darken-4">DESCRIPCION:&nbsp;</span><span class="black-text text-darken-4"><?php echo $Descripcion;?></span><br>
                   <span class="blue-text text-darken-4">CANTIDAD:&nbsp;</span><span class="black-text text-darken-4"><?php echo number_format($Cantidad,2);?></span><br>
+                  <span class="blue-text text-darken-4">DESCUENTO:&nbsp;</span><span class="black-text text-darken-4"><?php echo number_format($Descuento,2);?>%</span><br>
                   <span class="blue-text text-darken-4">IVA:&nbsp;</span><span class="black-text text-darken-4">$&nbsp;<?php echo number_format($Iva,2);?></span><br>
-                  <span class="blue-text text-darken-4">TOTAL:&nbsp;</span><span class="black-text text-darken-4">$&nbsp;<?php echo number_format($Subtotal+$Iva,2);?></span><br>
+                  <span class="blue-text text-darken-4">TOTAL:&nbsp;</span><span class="black-text text-darken-4">$&nbsp;<?php echo number_format($Subtotal+$Iva-($Subtotal*$Descuento/100),2);?></span><br>
                   <?php
                   if($Bonificado=='S'){
                     ?> 

@@ -7,13 +7,16 @@ $Cantidad=$_POST['Cantidad'];
 $Comentario=$_POST['Comentario'];
 $Id=$_POST['Id'];
 
-$Subtotal = $Cantidad * $Precio;
-$sql="SELECT PORCENTAJE FROM ITEMS where ITEM ='$Item' ";
+
+$sql="SELECT * FROM TEMP_PEDIDOD where Id =$Id ";
 $query = mysqli_query($con, $sql);
 $row=mysqli_fetch_array($query);
-$Porcentaje = $row['PORCENTAJE'];
+$Porcentaje = $row['Tarifa'];
+$Descuento = $row['Descuento'];
+$Subtotal = ($Cantidad * $Precio);
+$Base = ($Cantidad * $Precio)-(($Precio*$Descuento/100)*$Cantidad);
 
-$Iva = $Subtotal*($Porcentaje/100);
+$Iva = $Base*($Porcentaje/100);
 
 	
 	if (isset($_POST['Cambio'])){

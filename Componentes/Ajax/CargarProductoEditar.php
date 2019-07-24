@@ -16,6 +16,7 @@
                         $Bonificado=$row['Bonificado'];
                         $Cantidad=$row['Cantidad'];
                         $COMENTARIO=$row['COMENTARIO'];
+                        $Descuento=$row['Descuento'];
                         
                         $sql1="SELECT DESCRIPCION FROM  ITEMS where ITem= $Item ";
 		                $query1 = mysqli_query($con, $sql1);
@@ -42,6 +43,11 @@
 									<div class="row">
 										<span class="blue-text text-darken-4">DESCRIPCION:&nbsp;</span>
 										<span class="black-text text-darken-4"><?php echo $Descipcion; ?></span>
+									</div>
+									<div class="row">
+										<span class="blue-text text-darken-4">DESCUENTO:&nbsp;</span>
+										<span class="black-text text-darken-4"><?php echo number_format($Descuento,2); ?>%</span>
+										<input type="text" class="hide" name="Descuento" Id="Descuento" value="<?php echo $Descuento; ?>">
 									</div>
 									<div class="row">
 										<span class="blue-text text-darken-4">PRECIO:&nbsp;</span>
