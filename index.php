@@ -52,7 +52,7 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
           <li>
             <div class="collapsible-header" style="padding-right: 0px;padding-left: 0px;">
               <div class="row " style="margin: 0 auto;margin-left: 0px;margin-right: 0px;width: 100%;">
-                <div class="col m2 s1 center-align"><?php echo  $Numero;?></div>
+                <div class="col m2 s1 center-align"><?php echo  $Tipo.'-'.$Numero;?></div>
                 <div class="col m7 s7"><?php echo  $Tercero;?> </div>
                 <div class="col m3 s4 right-align">$<?php echo number_format($Total,2);?></div>
               </div>  
