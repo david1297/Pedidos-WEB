@@ -300,6 +300,7 @@ if(isset($_GET['T'])){
     $(document).ready(function(){
       $('select').formSelect();
       $('.modal').modal();
+      
       $('.fixed-action-btn').floatingActionButton();
       $('input.autocomplete').autocomplete({
         data: {
@@ -325,6 +326,12 @@ if(isset($_GET['T'])){
       });
 
     });
+    
+    function ListaPecios(){
+   
+					
+           }
+         
 function CambiarDir(Id){
   
   var Dir =$('#'+Id).val(); 
@@ -361,6 +368,7 @@ function CambiarDir(Id){
         },
         success:function(data){
           $(".outer_div").html(data).fadeIn('slow');
+          $("#Precio").focus();
           $("#Cantidad").focus();
           $('#Load1').hide();  
         }

@@ -26,12 +26,13 @@ class Login
             }
             if (!$this->db_connection->connect_errno) {
                 $Usuario = $this->db_connection->real_escape_string($_POST['Usuario']);
-                $sql = "select USERNAME,CLAVE,USUARIOFACTURA,nombres.IDVEND,vendedor.NOMBRE,
-                fatipdoc.MODIFICAVEND,fatipdoc.BODEGA,fatipdoc.LISTA_PRECIOS,fatipdoc.TIPO_PE,fatipdoc.PMDESCUENTO
-                from nombres
-                inner join vendedor on nombres.IDVEND = vendedor.IDVEND
-                inner join fatipdoc on fatipdoc.ID_USUARIO = nombres.USUARIOFACTURA
-                                        WHERE nombres.USERNAME=  '" . $Usuario . "';";
+                $sql = "select USERNAME,CLAVE,USUARIOFACTURA,NOMBRES.IDVEND,VENDEDOR.NOMBRE,
+                FATIPDOC.MODIFICAVEND,FATIPDOC.BODEGA,FATIPDOC.LISTA_PRECIOS,FATIPDOC.TIPO_PE,FATIPDOC.PMDESCUENTO,
+                FATIPDOC.PERMISOPRECIO,FATIPDOC.MODIPRECIOS
+                from NOMBRES
+                inner join VENDEDOR on NOMBRES.IDVEND = VENDEDOR.IDVEND
+                inner join FATIPDOC on FATIPDOC.ID_USUARIO = NOMBRES.USUARIOFACTURA
+                                        WHERE NOMBRES.USERNAME=  '" . $Usuario . "';";
                 $result_of_login_check = $this->db_connection->query($sql);
                 if ($result_of_login_check->num_rows == 1) {
                     $result_row = $result_of_login_check->fetch_object();
@@ -45,6 +46,8 @@ class Login
                         $_SESSION['BODEGA'] = $result_row->BODEGA;
                         $_SESSION['LISTA_PRECIOS'] = $result_row->LISTA_PRECIOS;
                         $_SESSION['MODIFICAVEND'] = $result_row->MODIFICAVEND;
+                        $_SESSION['PERMISOPRECIO'] = $result_row->PERMISOPRECIO;
+                        $_SESSION['MODIPRECIOS'] = $result_row->MODIPRECIOS;
                         $_SESSION['user_login_status'] = 1;
                         $_SESSION['Auditoria']='False';
                     } else {

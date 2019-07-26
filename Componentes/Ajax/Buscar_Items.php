@@ -100,7 +100,15 @@
 							//$Precio = $Precio- ($Precio*$Resp[0]/100);	
 						}
 					}
-
+					if($_SESSION['MODIPRECIOS']=='True'){
+						$Modifica ='';
+					}else{
+						$Modifica ='Readonly=Readonly';
+					}
+					$Lista='';
+					if($_SESSION['PERMISOPRECIO']=='S'){
+$Lista="ondblclick='ListaPecios()'";
+					}
 						$Item=$row['ITEM'];
 						$Descipcion=$row['DESCRIPCION'];
 					?>
@@ -124,11 +132,32 @@
 										<span class="black-text text-darken-4"><?php echo number_format($Des,2); ?>%</span>
 										<input type="text" class="hide" name="Descuento" Id="Descuento" value="<?php echo $Des; ?>">
 									</div>
-									<div class="row">
-										<span class="blue-text text-darken-4">PRECIO:&nbsp;</span>
-										<span class="black-text text-darken-4"><?php echo number_format($Precio,2); ?></span>
-										<input type="text" class="hide" name="Precio" Id="Precio" value="<?php echo $Precio; ?>">
+									<div class="row">	
+										<div class="input-field col m6 " id='InputPrecio'>
+											<input type="number" class="" name="Precio" Id="Precio" value="<?php echo $Precio; ?>" <?php echo $Modifica.' '.$Lista;?> >
+          									<label for="Precio">PRECIO</label>
+        								</div>
+										<?php
+										if($_SESSION['PERMISOPRECIO']=='S'){
+										?>
+										<div class="input-field col m6" id='SelectPrecio'>
+										<a class='dropdown-trigger btn hide white' href='#' data-target='SPrecio' id='APrecio' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+											<!-- Dropdown Structure -->
+											<ul id='SPrecio' class='dropdown-content ' onblur="$('#APrecio').addClass('hide');$('#InputPrecio').removeClass('hide');">
+											<li  onclick="$('#Precio').val('<?php echo $row['PRICE']; ?>');"><a href="#!">$<?php echo number_format($row['PRICE'],2); ?></a></li>
+											<li  onclick="$('#Precio').val('<?php echo $row['PRICE1']; ?>');"><a href="#!">$<?php echo number_format($row['PRICE1'],2); ?></a></li>
+											<li  onclick="$('#Precio').val('<?php echo $row['PRICE2']; ?>');"><a href="#!">$<?php echo number_format($row['PRICE2'],2); ?></a></li>
+											<li  onclick="$('#Precio').val('<?php echo $row['PRICE3']; ?>');"><a href="#!">$<?php echo number_format($row['PRICE3'],2); ?></a></li>
+											<li  onclick="$('#Precio').val('<?php echo $row['PRICE4']; ?>');"><a href="#!">$<?php echo number_format($row['PRICE4'],2); ?></a></li>
+											<li  onclick="$('#Precio').val('<?php echo $row['PRICE5']; ?>');"><a href="#!">$<?php echo number_format($row['PRICE5'],2); ?></a></li>
+											</ul>
+										</div>
+										<?php
+										}
+										?>
+										
 									</div>
+									
 									<div class="row">
 									<p>
 									<label>
@@ -154,6 +183,22 @@
 						</div>
 					</div>
 					<script>
+					 $(document).ready(function(){
+					  $('select').formSelect();
+					  $('.dropdown-trigger').dropdown();
+					 })
+					 $("#SPrecio").on("click",function(){
+  var se=$(this);
+  se.hide();
+});
+$("#Precio").dblclick(function(){
+	
+	$('#APrecio').removeClass('hide');
+	document.getElementById("APrecio").click();
+	$('#APrecio').click();
+
+
+    })
 					 $("#AgregarItem").submit(function( event ) { 
 						 var Precio = $('#Precio').val();
 						 var Cantidad = $('#Cantidad').val();
