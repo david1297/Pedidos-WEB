@@ -59,6 +59,12 @@ $query_update = mysqli_query($con,$sql);
 if ($OPeracion == 'Nuevo'){
 	NuevoE($Tipo,$Numero_PE);
 }	
+$QConfi="SELECT ManejoExistencia FROM CONFIGURACION ";
+$ResConfi = mysqli_query($con, $QConfi);
+$Resp=mysqli_fetch_array($ResConfi);
+$ManejoExistencia =$Resp[0]; 
+
+
 
 $sql="SELECT * FROM TEMP_PEDIDOD where Id_N ='$Id_N' and Estado <> 'Eliminado' ";
 $query = mysqli_query($con, $sql);
@@ -77,7 +83,18 @@ while($row=mysqli_fetch_array($query)){
 	$sql =  "INSERT INTO PEDIDOD (Tipo,Numero,Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa) VALUES 
 	('$Tipo',$Numero_PE,'$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa);";
 	$query_update = mysqli_query($con,$sql);
+
+	$sql =  "INSERT INTO PEDIDOD (Tipo,Numero,Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa) VALUES 
+	('$Tipo',$Numero_PE,'$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa);";
+	$query_update = mysqli_query($con,$sql);
+	if ($ManejoExistencia=='S'){
+		$sql =  "UPDATE EXISTENCIA SET SALDO = SALDO - $Cantidad WHERE ITEM= '$Item' AND BODEGA ='$Bodega';";
+		ECHO $sql;
+		$query_update = mysqli_query($con,$sql);	
+	}
+
 }
+
 if ($OPeracion == 'Nuevo'){
 	NuevoD($Tipo,$Numero_PE);
 }	

@@ -30,11 +30,11 @@ $Iva = $Base*($Porcentaje/100);
     if($row[0]=='Agregado'){
 		$sql =  "UPDATE TEMP_PEDIDOD Set Cantidad=$Cantidad,Subtotal=$Subtotal,Iva=$Iva,Bonificado='$Bonificado',
 		COMENTARIO='$Comentario',Precio=$Precio where Id =$Id
-		and (Cantidad<>$Cantidad or Bonificado<>'$Bonificado' or COMENTARIO<>'$Comentario' );"; 
+		and (Cantidad<>$Cantidad or Bonificado<>'$Bonificado' or COMENTARIO<>'$Comentario' or Precio<>$Precio);"; 
     }else{
 		$sql =  "UPDATE TEMP_PEDIDOD Set Cantidad=$Cantidad,Subtotal=$Subtotal,Iva=$Iva,Bonificado='$Bonificado',
 		COMENTARIO='$Comentario',Precio=$Precio, Estado = 'Modificado' where Id =$Id
-		and (Cantidad<>$Cantidad or Bonificado<>'$Bonificado' or COMENTARIO<>'$Comentario' );"; 
+		and (Cantidad<>$Cantidad or Bonificado<>'$Bonificado' or COMENTARIO<>'$Comentario'  or Precio<>$Precio);"; 
     }
 
 	

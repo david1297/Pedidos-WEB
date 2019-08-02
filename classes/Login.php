@@ -26,7 +26,7 @@ class Login
             }
             if (!$this->db_connection->connect_errno) {
                 $Usuario = $this->db_connection->real_escape_string($_POST['Usuario']);
-                $sql = "select USERNAME,CLAVE,USUARIOFACTURA,NOMBRES.IDVEND,VENDEDOR.NOMBRE,
+                $sql = "select USERNAME,CLAVE,USUARIOFACTURA,NOMBRES.IDVEND,VENDEDOR.NOMBRE,FATIPDOC.PMSINEXISTENCIA,
                 FATIPDOC.MODIFICAVEND,FATIPDOC.BODEGA,FATIPDOC.LISTA_PRECIOS,FATIPDOC.TIPO_PE,FATIPDOC.PMDESCUENTO,
                 FATIPDOC.PERMISOPRECIO,FATIPDOC.MODIPRECIOS
                 from NOMBRES
@@ -48,6 +48,7 @@ class Login
                         $_SESSION['MODIFICAVEND'] = $result_row->MODIFICAVEND;
                         $_SESSION['PERMISOPRECIO'] = $result_row->PERMISOPRECIO;
                         $_SESSION['MODIPRECIOS'] = $result_row->MODIPRECIOS;
+                        $_SESSION['PMSINEXISTENCIA'] = $result_row->PMSINEXISTENCIA;
                         $_SESSION['user_login_status'] = 1;
                         $_SESSION['Auditoria']='False';
                     } else {

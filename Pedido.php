@@ -404,7 +404,8 @@ function CambiarDir(Id){
         },
         success:function(data){
           $("#CargarEdit").html(data);
-          $('#Cantidad').focus();
+          $("#PrecioE").focus();
+          $("#CantidadE").focus();
         }
       })
     }
@@ -472,7 +473,7 @@ function CambiarDir(Id){
             $('#EnviarPedido').addClass("disabled");
           },
           success:function(data){
-            //alert(data);
+            alert(data);
             $('#EnviarPedido').removeClass("disabled");
             var r = confirm("Deseas Realizar Un Nuevo Pedido");
             if (r == true) {

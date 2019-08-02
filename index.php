@@ -15,12 +15,21 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
 <html lang="es">
 <head>
   <?php include("Head.html");?>
+  <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
 </head>
+
 <body>
 <?php
 			include("Menu.php");?>
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
+    
       <br><br>
       <h3 class="header center blue-text"><?php echo $_SESSION['NOMBRE'];?></h3>
       <div class="row center">
@@ -37,7 +46,7 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
       <ul class="collapsible">
         <?php
         $sql="SELECT Tipo,Numero,(Subtotal+Iva-PEDIDOE.Descuento) as Total ,TERCEROS.company FROM PEDIDOE 
-        inner join TERCEROS on  TERCEROS.Id_N = PEDIDOE.Id_N 
+        inner join TERCEROS on  TERCEROS.Id_N = PEDIDOE.Id_N and TERCEROS.succliente = PEDIDOE.succliente
         where PEDIDOE.Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SESSION['USERNAME']."'
         GROUP BY Tipo,Numero,total ,TERCEROS.company ";
         $SumCant= 0;
@@ -125,6 +134,9 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
     <div class="row center">
         <a href="Consulta_Terceros.php" id="download-button" class="btn-large waves-effect waves-light orange">Pedidos</a>
       </div>
+      <button  onclick="initMap()">Find Me</button>
+    <div id="map"></div>
+    
       <!--
       <div class="row">
         <div class="col s12 m4">
@@ -174,11 +186,45 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
+
 <script> $(document).ready(function(){
     $('.collapsible').collapsible();
     $('select').formSelect();
     $('.modal').modal();
       $('.fixed-action-btn').floatingActionButton();
   });</script>
+  <script>
+// Initialize and add the map
+function initMap() {
+  var latitude;
+  var longitude;
+  if ("geolocation" in navigator){ //check geolocation available 
+    //try to get user current location using getCurrentPosition() method
+    navigator.geolocation.getCurrentPosition(function(position){ 
+      longitude =position.coords.longitude;
+      latitude=position.coords.latitude;
+      console.log("Ubicacion: "+latitude+" nLang :"+ longitude);
+  var uluru = {lat: latitude, lng: longitude};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 20, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+         
+        });
+}else{
+    console.log("Browser doesn't support geolocation!");
+}
+
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDG3D421KThrAsWqCyJkXqDJ5rLZQbr-2Q&callback=initMap">
+    </script>
   </body>
 </html>

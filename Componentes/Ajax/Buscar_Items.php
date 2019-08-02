@@ -97,8 +97,15 @@
 						$Resp=mysqli_fetch_array($QRest);
 						if ($Resp[0] <> 0){
 							$Des=$Resp[0];
-							//$Precio = $Precio- ($Precio*$Resp[0]/100);	
+							//$Precio = $Precio- ($Precio*$Resp[0]/100);
+							$Descuento='<div class="row">
+							<span class="blue-text text-darken-4">DESCUENTO:&nbsp;</span>
+							<span class="black-text text-darken-4">'.number_format($Des,2).'%</span>
+							<input type="text" class="hide" name="Descuento" Id="Descuento" value="'.$Des.'">
+						</div>'	;
 						}
+					}else{
+						$Descuento='';
 					}
 					if($_SESSION['MODIPRECIOS']=='True'){
 						$Modifica ='';
@@ -107,10 +114,41 @@
 					}
 					$Lista='';
 					if($_SESSION['PERMISOPRECIO']=='S'){
-$Lista="ondblclick='ListaPecios()'";
+						$Lista="ondblclick='ListaPecios()'";
 					}
 						$Item=$row['ITEM'];
 						$Descipcion=$row['DESCRIPCION'];
+					
+					$QConfi="SELECT ManejoExistencia FROM CONFIGURACION ";
+					$ResConfi = mysqli_query($con, $QConfi);
+					$Resp=mysqli_fetch_array($ResConfi);
+					$ManejoExistencia =$Resp[0]; 
+
+					if ($ManejoExistencia=='S'){
+						$QExis="SELECT SALDO FROM EXISTENCIA WHERE ITEM ='$Item' AND BODEGA ='".$_SESSION['BODEGA']."' ";
+						$ResExis = mysqli_query($con, $QExis);
+						$Resp=mysqli_fetch_array($ResExis);
+						$Saldo = $Resp[0];
+
+						$QExis="SELECT SUM(CANTIDAD) AS CANTIDAD FROM TEMP_PEDIDOD WHERE ITEM ='$Item' AND BODEGA ='".$_SESSION['BODEGA']."' ";
+						$ResExis = mysqli_query($con, $QExis);
+						$Resp=mysqli_fetch_array($ResExis);
+						$Saldo = $Saldo-$Resp['CANTIDAD'];
+						$Existencia='
+						<div class="row">
+							<span class="blue-text text-darken-4">EXISTENCIA:&nbsp;</span>
+							<span class="black-text text-darken-4">'.number_format($Saldo,2).'</span>
+						</div>';
+						if ($_SESSION['PMSINEXISTENCIA'] <>'S'){
+							$ManejoExistencia='S';	
+						}else{
+							$ManejoExistencia='N';	
+						}
+						
+					}else{
+						$Existencia='';	
+						$Saldo=0;
+					}
 					?>
 					<div class="col s12 m12">
 						<div class="card">
@@ -122,16 +160,18 @@ $Lista="ondblclick='ListaPecios()'";
 										<span class="black-text text-darken-4"><?php echo $Item; ?></span>
 										<input type="text" class="hide" name="Item" value="<?php echo $Item; ?>">
 										<input type="text" class="hide" name="Id_N" value="<?php echo $Id_N; ?>">
+										<input type="text" class="hide" name="ManejoExistencia" id="ManejoExistencia" value="<?php echo $ManejoExistencia; ?>">
+										<input type="text" class="hide" name="Saldo" id="Saldo" value="<?php echo $Saldo; ?>">
 									</div>
 									<div class="row">
 										<span class="blue-text text-darken-4">DESCRIPCION:&nbsp;</span>
 										<span class="black-text text-darken-4"><?php echo $Descipcion; ?></span>
 									</div>
-									<div class="row">
-										<span class="blue-text text-darken-4">DESCUENTO:&nbsp;</span>
-										<span class="black-text text-darken-4"><?php echo number_format($Des,2); ?>%</span>
-										<input type="text" class="hide" name="Descuento" Id="Descuento" value="<?php echo $Des; ?>">
-									</div>
+									
+									<?php
+									echo $Descuento;
+									echo $Existencia;
+									?>
 									<div class="row">	
 										<div class="input-field col m6 " id='InputPrecio'>
 											<input type="number" class="" name="Precio" Id="Precio" value="<?php echo $Precio; ?>" <?php echo $Modifica.' '.$Lista;?> >
@@ -202,26 +242,30 @@ $("#Precio").dblclick(function(){
 					 $("#AgregarItem").submit(function( event ) { 
 						 var Precio = $('#Precio').val();
 						 var Cantidad = $('#Cantidad').val();
+						 var ManejoExistencia = $('#ManejoExistencia').val();
+						 var Saldo = $('#Saldo').val();
 						if(Precio==0){
 							alert('El Precio No puede ser 0');
 						}else{
 							if(Cantidad==0 || Cantidad==''){
 								alert('la Cantidad No puede ser 0');
 							}else{
-								var parametros = $(this).serialize();
-	 					$.ajax({
-		  					type: "POST",
-							url: "Componentes/Ajax/AgregarItem.php",
-		  					data: parametros,
-			 				beforeSend: function(objeto){
-			  				},
-		  					success: function(datos){
-	   							$('#BuscarItem').modal('close');
-								   CargarProductos();
-							}
-  						});
-  						
-					
+								if (ManejoExistencia=='S'&& Cantidad >Saldo){
+									alert('la Cantidad No puede Superar la Existencia');	
+								}else{
+									var parametros = $(this).serialize();
+									$.ajax({
+										type: "POST",
+										url: "Componentes/Ajax/AgregarItem.php",
+										data: parametros,
+										beforeSend: function(objeto){
+										},
+										success: function(datos){
+											$('#BuscarItem').modal('close');
+											CargarProductos();
+										}
+									});
+								}
 							}
 						}
 						event.preventDefault();
