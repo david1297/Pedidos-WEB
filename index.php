@@ -210,10 +210,9 @@ function initMap() {
       document.getElementById('map'), {zoom: 20, center: uluru});
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({position: uluru, map: map});
-         
         });
 }else{
-    console.log("Browser doesn't support geolocation!");
+    alert('No se puede Acceder a localizacion');
 }
 
 }
