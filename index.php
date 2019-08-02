@@ -198,7 +198,7 @@ $sql="SELECT * FROM PEDIDOE where Fecha =CURDATE() and PEDIDOE.USERNAME ='".$_SE
 function initMap() {
   var latitude;
   var longitude;
-  if ("geolocation" in navigator){ //check geolocation available 
+  if (navigator.geolocation){ //check geolocation available 
     //try to get user current location using getCurrentPosition() method
     navigator.geolocation.getCurrentPosition(function(position){ 
       longitude =position.coords.longitude;
