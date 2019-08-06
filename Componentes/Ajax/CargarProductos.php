@@ -20,13 +20,13 @@ $Id_N = $_GET['Id_N'];
           $Descripcion = $row1['DESCRIPCION'];
           if ($h==1){
             ?>
-            <div class="row">
+            <div class="row"  style="margin-bottom: 5px;">
             <?php
           }else{
             if ($h%2 <> 0){
               ?>
               </div>
-              <div class="row">
+              <div class="row" style="margin-bottom: 5px;" >
               <?php
 
             }
@@ -35,7 +35,7 @@ $Id_N = $_GET['Id_N'];
           <div class="col s12 m6">
             <div class="card">
               <div class="card-image">
-                <div class="card-content">
+                <div class="card-content" style="padding-top: 12px;padding-bottom: 12px;">
                   <span class="blue-text text-darken-4">ITEM:&nbsp;</span><span class="black-text text-darken-4"><?php echo $Item;?></span><br>
                   <span class="blue-text text-darken-4">DESCRIPCION:&nbsp;</span><span class="black-text text-darken-4"><?php echo $Descripcion;?></span><br>
                   <span class="blue-text text-darken-4">CANTIDAD:&nbsp;</span><span class="black-text text-darken-4"><?php echo number_format($Cantidad,2);?></span><br>
@@ -52,7 +52,7 @@ $Id_N = $_GET['Id_N'];
                 </div>
                 <a class="btn-floating halfway-fab waves-effect waves-light cyan accent-4" onclick="EdiarItem(<?php echo $Id;?>)"><i class="material-icons">mode_edit</i></a>
               </div>
-              <div class="card-content">
+              <div class="card-content" style="padding-bottom: 12px;padding-top: 15px;">
 
               <div class="row">
               <span class="blue-text text-darken-4">COMENTARIO:&nbsp;</span>

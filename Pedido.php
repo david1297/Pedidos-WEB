@@ -81,7 +81,7 @@ if(isset($_GET['T'])){
 </head>
 <body onload="CargarProductos()">
 <?php include("Menu.php");?>
-  <div class="section no-pad-bot" id="index-banner">
+  <div class="section no-pad-bot" id="index-banner" style="padding-top: 0.5rem;">
     <div class="container">
       <form class="col s12">  
         <div class="row z-depth-2" style="margin-bottom: 0px;">
@@ -95,10 +95,10 @@ if(isset($_GET['T'])){
       </form>
     </div>
   </div>
-  <div class="section no-pad-bot" id="index-banner">
+  <div class="section no-pad-bot" id="index-banner" style="padding-top: 0.5rem;">
     <div class="container">
       <form class="col s12">  
-        <div class="row z-depth-2" >
+        <div class="row z-depth-2" style="margin-bottom: 5px;" >
           <div class="col s12">   
             <div class="input-field col s12">
             
@@ -473,7 +473,7 @@ function CambiarDir(Id){
             $('#EnviarPedido').addClass("disabled");
           },
           success:function(data){
-            alert(data);
+            //alert(data);
             $('#EnviarPedido').removeClass("disabled");
             var r = confirm("Deseas Realizar Un Nuevo Pedido");
             if (r == true) {

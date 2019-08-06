@@ -53,8 +53,10 @@ if($OPeracion == 'Editar'){
 }
 
 $sql =  "INSERT INTO PEDIDOE (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Comentario,Fecha,Hora,USERNAME,IDVEND,SINC,Estado,BONOTOTAL,Terms) VALUES 
-('$Tipo',$Numero_PE,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$Fecha','$Hora','$USERNAME',$IDVEND,'N','PENDIENTE',$BONOTOTAL,'$Terms');";
+('$Tipo',$Numero_PE,'$Id_N',$succliente,$Subtotal,$Iva,$Descuento,'$Comentario','$Fecha','$Hora','$USERNAME',$IDVEND,'S','PENDIENTE',$BONOTOTAL,'$Terms');";
 $query_update = mysqli_query($con,$sql);
+
+	
 
 if ($OPeracion == 'Nuevo'){
 	NuevoE($Tipo,$Numero_PE);
@@ -89,7 +91,6 @@ while($row=mysqli_fetch_array($query)){
 	$query_update = mysqli_query($con,$sql);
 	if ($ManejoExistencia=='S'){
 		$sql =  "UPDATE EXISTENCIA SET SALDO = SALDO - $Cantidad WHERE ITEM= '$Item' AND BODEGA ='$Bodega';";
-		ECHO $sql;
 		$query_update = mysqli_query($con,$sql);	
 	}
 
@@ -104,6 +105,10 @@ $sql =  "DELETE FROM  TEMP_PEDIDOE where Id_N =$Id_N;";
 $query_update = mysqli_query($con,$sql);
 $sql =  "DELETE FROM  TEMP_PEDIDOD where Id_N =$Id_N and id<>0;";
 $query_update = mysqli_query($con,$sql);
+$sql =  "UPDATE PEDIDOE SET SINC = 'N' WHERE Tipo= '$Tipo' AND Numero =$Numero_PE;";
+$query_update = mysqli_query($con,$sql);
+
+
 ?>
 
 
