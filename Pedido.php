@@ -312,6 +312,8 @@ if(isset($_GET['T'])){
       $('.datepicker').datepicker({
         autoClose: 'true',
         minDate : Fecha ,
+        defaultDate : Fecha,
+        setDefaultDate : 'true',
         format: 'dd-mm-yyyy',
         i18n: {
           cancel :'Cancelar',
