@@ -305,11 +305,13 @@ if(isset($_GET['T'])){
   <script src="js/autocomplete.js"></script>
   <script>
     $(document).ready(function(){
+      var Fecha = new Date();
       $('select').formSelect();
       $('.modal').modal();
    
       $('.datepicker').datepicker({
         autoClose: 'true',
+        minDate : Fecha ,
         format: 'dd-mm-yyyy',
         i18n: {
           cancel :'Cancelar',
