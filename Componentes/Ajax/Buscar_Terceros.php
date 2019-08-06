@@ -23,7 +23,7 @@
 			$row1=mysqli_fetch_array($query1);
 			if ($row1[0]<>0 ){
 				?>
-				<a class="waves-effect waves-light btn green" onclick="location.href='pedido.php?T=<?php echo $id_n;?>'">
+				<a class="waves-effect waves-light btn green" onclick="location.href='Pedido.php?T=<?php echo $id_n;?>'">
 					<i class="material-icons left">mode_edit</i>Pendiente
 				</a>
 

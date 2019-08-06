@@ -100,7 +100,7 @@ if(isset($_GET['T'])){
       <form class="col s12">  
         <div class="row z-depth-2" style="margin-bottom: 5px;" >
           <div class="col s12">   
-            <div class="input-field col s12">
+            <div class="input-field col s12" style="margin-bottom: 0.5rem;">
             
               <i class="material-icons prefix">person</i>
               <input type="text" id="BuscarTercero" readonly="True"  value="<?php echo $Tercero[0]['Nombre'];?>">
@@ -108,7 +108,7 @@ if(isset($_GET['T'])){
               <input type="text" id="Nivel" name="Nivel"  class="hide" value="<?php echo $Tercero[0]['Nivel'];?>">
               <label for="BuscarTercero">Tercero</label>
             </div>
-            <div class="input-field col s12">
+            <div class="input-field col s12" style="margin-bottom: 0.5rem;">
               <i class="material-icons prefix">location_on</i>
               <select id="Addr1"  name="Addr1" onchange="CambiarDir('Addr1')">
                 <?php
@@ -124,7 +124,7 @@ if(isset($_GET['T'])){
               </select>
               <label for="Addr1">Direccion de Envio</label>
             </div>
-            <div class="input-field col s12">
+            <div class="input-field col s12" style="margin-bottom: 0.5rem;">
               <i class="material-icons prefix">phone_iphone</i>
               <select id="Phone1"  name="Phone1" onchange="CambiarDir('Phone1')"disabled>
                 <?php
@@ -139,6 +139,13 @@ if(isset($_GET['T'])){
                 ?>
               </select>
               <label  for="Phone1">Numero Telefonico</label>
+            </div>
+            <div class="input-field col s12" style="margin-bottom: 0.5rem;">
+            
+              <i class="material-icons prefix">event</i>
+              <input type="text" id="FechaEntrega" class="datepicker" id="FechaEntrega"  value="<?php echo date("d-m-Y");?>">
+              
+              <label for="FechaEntrega">Fecha de Entrega</label>
             </div>
           </div>
         </div>
@@ -300,7 +307,71 @@ if(isset($_GET['T'])){
     $(document).ready(function(){
       $('select').formSelect();
       $('.modal').modal();
-      
+   
+      $('.datepicker').datepicker({
+  
+    format: 'dd-mm-yyyy',
+    i18n : {
+      cancel :'Cancelar',
+      months: 
+
+[
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre'
+],monthsShort:
+[
+  'Ene',
+  'Feb',
+  'Mar',
+  'Abr',
+  'May',
+  'Jun',
+  'Jul',
+  'Ago',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dic'
+],
+weekdays:
+[
+  'Domingo',
+  'Lunes',
+  'Martes',
+  'Miercoles',
+  'Jueves',
+  'Viernes',
+  'Sabado'
+],
+weekdaysShort:
+[
+  'Dom',
+  'Lun',
+  'Mar',
+  'Mie',
+  'Jue',
+  'Vie',
+  'Sab'
+],
+weekdaysAbbrev:	['Do','Lu','Ma','Mi','Ju','Vi','Sa']
+    },
+    
+
+   
+                  
+
+
+  });
       $('.fixed-action-btn').floatingActionButton();
       $('input.autocomplete').autocomplete({
         data: {
