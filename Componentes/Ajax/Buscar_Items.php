@@ -173,14 +173,14 @@
 									echo $Existencia;
 									?>
 									<div class="row">	
-										<div class="input-field col m6 " id='InputPrecio'>
+										<div class="input-field col m6 s12 " id='InputPrecio'>
 											<input type="number" class="" name="Precio" Id="Precio" value="<?php echo $Precio; ?>" <?php echo $Modifica.' '.$Lista;?> >
           									<label for="Precio">PRECIO</label>
         								</div>
 										<?php
 										if($_SESSION['PERMISOPRECIO']=='S'){
 										?>
-										<div class="input-field col m6" id='SelectPrecio'>
+										<div class="input-field col m6 s12" id='SelectPrecio'>
 										<a class='dropdown-trigger btn hide white' href='#' data-target='SPrecio' id='APrecio' >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 											<!-- Dropdown Structure -->
 											<ul id='SPrecio' class='dropdown-content ' onblur="$('#APrecio').addClass('hide');$('#InputPrecio').removeClass('hide');">
