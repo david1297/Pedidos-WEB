@@ -309,68 +309,16 @@ if(isset($_GET['T'])){
       $('.modal').modal();
    
       $('.datepicker').datepicker({
-  
-    format: 'dd-mm-yyyy',
-    i18n : {
-      cancel :'Cancelar',
-      months: 
-
-[
-  'Enero',
-  'Febrero',
-  'Marzo',
-  'Abril',
-  'Mayo',
-  'Junio',
-  'Julio',
-  'Agosto',
-  'Septiembre',
-  'Octubre',
-  'Noviembre',
-  'Diciembre'
-],monthsShort:
-[
-  'Ene',
-  'Feb',
-  'Mar',
-  'Abr',
-  'May',
-  'Jun',
-  'Jul',
-  'Ago',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dic'
-],
-weekdays:
-[
-  'Domingo',
-  'Lunes',
-  'Martes',
-  'Miercoles',
-  'Jueves',
-  'Viernes',
-  'Sabado'
-],
-weekdaysShort:
-[
-  'Dom',
-  'Lun',
-  'Mar',
-  'Mie',
-  'Jue',
-  'Vie',
-  'Sab'
-],
-weekdaysAbbrev:	['Do','Lu','Ma','Mi','Ju','Vi','Sa']
-    },
-    
-
-   
-                  
-
-
+        autoClose: 'true',
+        format: 'dd-mm-yyyy',
+        i18n: {
+          cancel :'Cancelar',
+          months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+          monthsShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+          weekdays: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
+          weekdaysShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
+          weekdaysAbbrev:	['Do','Lu','Ma','Mi','Ju','Vi','Sa']
+        }
   });
       $('.fixed-action-btn').floatingActionButton();
       $('input.autocomplete').autocomplete({
