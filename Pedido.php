@@ -20,9 +20,7 @@ if(isset($_GET['T'])){
         $h=$h+1;
     }
 
-
-
-
+    $FechaEntrega=date("d-m-Y");
     $sql="SELECT count(*) FROM TEMP_PEDIDOE where Id_N ='$Id_N' ";
     $query = mysqli_query($con, $sql);
     $row=mysqli_fetch_array($query);
@@ -30,9 +28,9 @@ if(isset($_GET['T'])){
     
 
       $sql =  "INSERT INTO TEMP_PEDIDOE
-       (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Terms) VALUES
+       (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Terms,FechaEntrega) VALUES
       
-       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0,'$Terms');";
+       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0,'$Terms','".date("Y-m-d")."');";
         $query_update = mysqli_query($con,$sql);
         $Pedido='Nuevo Pedido';
     }else{
@@ -47,6 +45,7 @@ if(isset($_GET['T'])){
       $Descuento =$row['Descuento'];
       $Tipo =$row['Tipo'];
       $Numero =$row['Numero'];
+      $FechaEntrega =$row['FechaEntrega'];
 
       $sql="SELECT Estado FROM PEDIDOE where Tipo ='$Tipo' and Numero = $Numero ";
       $query = mysqli_query($con, $sql);
@@ -143,7 +142,7 @@ if(isset($_GET['T'])){
             <div class="input-field col s12" style="margin-bottom: 0.5rem;">
             
               <i class="material-icons prefix">event</i>
-              <input type="text" id="FechaEntrega" class="datepicker" id="FechaEntrega"  value="<?php echo date("d-m-Y");?>">
+              <input type="text" id="FechaEntrega" class="datepicker" name="FechaEntrega"  value="<?php echo date("d-m-Y",strtotime($FechaEntrega));?>"  onchange="CambiarFechaEntrega()">
               
               <label for="FechaEntrega">Fecha de Entrega</label>
             </div>
@@ -305,13 +304,14 @@ if(isset($_GET['T'])){
   <script src="js/autocomplete.js"></script>
   <script>
     $(document).ready(function(){
-      var Fecha = new Date();
+      var Fecha = new Date('<?php echo date("Y,m,d",strtotime($FechaEntrega));?>');
+      var FechaMin=new Date();
       $('select').formSelect();
       $('.modal').modal();
-   
+
       $('.datepicker').datepicker({
         autoClose: 'true',
-        minDate : Fecha ,
+        minDate : FechaMin ,
         defaultDate : Fecha,
         setDefaultDate : 'true',
         format: 'dd-mm-yyyy',
@@ -371,6 +371,21 @@ function CambiarDir(Id){
           
         },
         success:function(data){
+        }
+      })
+}
+function CambiarFechaEntrega(){
+   var Fecha= $('#FechaEntrega').val();
+   var Id_N = $("#Id_N").val();
+ 
+  ajax = null;
+      ajax= $.ajax({
+      url:'Componentes/Ajax/CambiarFechaEntrega.php?Fecha='+Fecha+'&Id_N='+Id_N,
+        beforeSend: function(objeto){
+          
+        },
+        success:function(data){
+          
         }
       })
 }
