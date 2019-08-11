@@ -30,7 +30,7 @@ if(isset($_GET['T'])){
       $sql =  "INSERT INTO TEMP_PEDIDOE
        (Tipo,Numero,Id_N,succliente,Subtotal,Iva,Descuento,Terms,FechaEntrega) VALUES
       
-       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',0,0,0,0,'$Terms','".date("Y-m-d")."');";
+       ('".$_SESSION['TIPO_PE']."',0,'$Id_N',".$Tercero[0]['succliente'].",0,0,0,'$Terms','".date("Y-m-d")."');";
         $query_update = mysqli_query($con,$sql);
         $Pedido='Nuevo Pedido';
     }else{
