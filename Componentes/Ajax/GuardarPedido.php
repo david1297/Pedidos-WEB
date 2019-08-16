@@ -86,10 +86,6 @@ while($row=mysqli_fetch_array($query)){
 	$sql =  "INSERT INTO PEDIDOD (Tipo,Numero,Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa) VALUES 
 	('$Tipo',$Numero_PE,'$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa);";
 	$query_update = mysqli_query($con,$sql);
-
-	$sql =  "INSERT INTO PEDIDOD (Tipo,Numero,Id_N,Item,Cantidad,Subtotal,Iva,Descuento,Bonificado,COMENTARIO,Precio,Bodega,Tarifa) VALUES 
-	('$Tipo',$Numero_PE,'$Id_N','$Item',$Cantidad,$Subtotal,$Iva,$Descuento,'$Bonificado','$COMENTARIO',$Precio,'$Bodega',$Tarifa);";
-	$query_update = mysqli_query($con,$sql);
 	if ($ManejoExistencia=='S'){
 		$sql =  "UPDATE EXISTENCIA SET SALDO = SALDO - $Cantidad WHERE ITEM= '$Item' AND BODEGA ='$Bodega';";
 		$query_update = mysqli_query($con,$sql);	
