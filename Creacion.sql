@@ -1,12 +1,15 @@
 Create database PedidoM;
 Use PedidoM;
+
 CREATE TABLE `administradores` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Usuario` varchar(45) DEFAULT NULL,
   `Clave` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
 INSERT INTO administradores (Usuario,Clave)Values('Admin','12345');
+
 CREATE TABLE `auditoria_pedidod` (
   `Tipo` char(3) NOT NULL,
   `Numero` int(11) NOT NULL,
@@ -55,6 +58,19 @@ CREATE TABLE `cartera` (
   `Id_N` char(30) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE TABLE `configuracion` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `ManejoExistencia` char(1) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO configuracion(ManejoExistencia) VALUES('N');
+CREATE TABLE `existencia` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `ITEM` char(30) DEFAULT NULL,
+  `BODEGA` char(3) DEFAULT NULL,
+  `SALDO` double DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 CREATE TABLE `fatipdoc` (
   `ID_USUARIO` char(10) NOT NULL,
   `MODIFICAVEND` char(1) DEFAULT 'N',
@@ -64,6 +80,8 @@ CREATE TABLE `fatipdoc` (
   `PMDESCUENTO` char(1) DEFAULT 'N',
   `Bodega` char(3) DEFAULT NULL,
   `Lista_Precios` char(1) DEFAULT NULL,
+  `PERMISOPRECIO` char(1) DEFAULT NULL,
+  `MODIPRECIOS` char(5) DEFAULT NULL,
   PRIMARY KEY (`ID_USUARIO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `items` (
@@ -120,6 +138,7 @@ CREATE TABLE `pedidoe` (
   `Estado` varchar(45) DEFAULT NULL,
   `BONOTOTAL` double DEFAULT NULL,
   `Terms` char(15) DEFAULT NULL,
+  `FechaEntrega` date DEFAULT NULL,
   PRIMARY KEY (`Tipo`,`Numero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `temp_pedidod` (
@@ -151,6 +170,7 @@ CREATE TABLE `temp_pedidoe` (
   `IDVEND` int(11) DEFAULT NULL,
   `BONOTOTAL` double DEFAULT NULL,
   `Terms` char(15) DEFAULT NULL,
+  `FechaEntrega` date DEFAULT NULL,
   PRIMARY KEY (`Id_N`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `terceros` (
@@ -163,6 +183,7 @@ CREATE TABLE `terceros` (
   `NIVEL` char(10) DEFAULT NULL,
   `COMPANY_EXTENDIDO` char(80) DEFAULT NULL,
   `Terms` char(15) DEFAULT NULL,
+  `FechaEntrega` date DEFAULT NULL,
   PRIMARY KEY (`id_n`,`succliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `vendedor` (
