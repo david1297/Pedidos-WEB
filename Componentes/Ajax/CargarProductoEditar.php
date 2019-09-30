@@ -5,8 +5,8 @@
 
 
 		$Id = mysqli_real_escape_string($con,(strip_tags($_REQUEST['Id'], ENT_QUOTES)));
+		$Nivel = mysqli_real_escape_string($con,(strip_tags($_REQUEST['Nivel'], ENT_QUOTES)));
 		
-
 		
 		$sql="SELECT * FROM  TEMP_PEDIDOD where Id= $Id ";
 		$query = mysqli_query($con, $sql);
@@ -88,7 +88,7 @@
 									<div class="row">
 										<span class="blue-text text-darken-4">ITEM:&nbsp;</span>
 										<span class="black-text text-darken-4"><?php echo $Item; ?></span>
-										<input type="text" class="hide" name="Item" value="<?php echo $Item; ?>">
+										<input type="text" class="hide" name="Item" id="ItemE" value="<?php echo $Item; ?>">
 										<input type="text" class="hide" name="Id" value="<?php echo $Id; ?>">
 										<input type="text" class="hide" name="ManejoExistencia" id="ManejoExistenciaE" value="<?php echo $ManejoExistencia; ?>">
 										<input type="text" class="hide" name="Saldo" id="SaldoE" value="<?php echo $Saldo; ?>">
@@ -136,7 +136,7 @@
 									</p>
 									</div>
 									<div class="row input-field">
-      									<input  id="CantidadE" name="Cantidad" type="Number"  value="<?php echo $Cantidad; ?>" min='0'max='99999' onfocus="var H =$(this).val();$(this).val(0); $(this).val(H);">
+      									<input  id="CantidadE" name="Cantidad" type="Number"  value="<?php echo $Cantidad; ?>" min='0'max='99999' onfocus="var H =$(this).val();$(this).val(0); $(this).val(H);" onkeyup='CambioPrecioE()' >
       									<label class="active" for="Cantidad">Cantidad</label>
     								</div>
 									<div class="row ">
@@ -195,6 +195,27 @@
 					document.getElementById("APrecioE").click();
 					$('#APrecioE').click();
     				})
+					function CambioPrecioE(){
+						var Item = $('#ItemE').val();
+						var Cantidad = $('#CantidadE').val();
+						var Nivel = $("#Nivel").val();
+						
+
+						if (Nivel == 'N'){
+							$.ajax({
+										type: "GET",
+										url: "Componentes/Ajax/Buscar_Precio.php?Item="+Item+"&Cantidad="+Cantidad,
+										beforeSend: function(objeto){
+										},
+										success: function(datos){
+											
+											var Precio = datos.split("-");
+											$('#PrecioE').val(Precio[1]);	
+										}
+									});
+						}
+						
+					}
 					</script>
 
 

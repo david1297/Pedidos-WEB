@@ -114,7 +114,7 @@ require_once ("config/conexion.php");
           load(1);
         })
       })*/
-
+     
       $('.modal').modal();
       $('#Load').hide();
       $('input.autocomplete').autocomplete({

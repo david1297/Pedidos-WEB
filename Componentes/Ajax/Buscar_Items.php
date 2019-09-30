@@ -89,8 +89,9 @@
 								
 						}	
 					}
-					$Des=0;
 					
+					$Des=0;
+					$Descuento='';
 					if ($_SESSION['PMDESCUENTO'] =='S'){
 						$QTercero="SELECT Descuento FROM TERCEROS WHERE id_n = '$Id_N'  ";
 						$QRest = mysqli_query($con, $QTercero);
@@ -103,9 +104,11 @@
 							<span class="black-text text-darken-4">'.number_format($Des,2).'%</span>
 							<input type="text" class="hide" name="Descuento" Id="Descuento" value="'.$Des.'">
 						</div>'	;
+						}else{
+							$Descuento='<input type="text" class="hide" name="Descuento" Id="Descuento" value="0">';
 						}
 					}else{
-						$Descuento='';
+						$Descuento='<input type="text" class="hide" name="Descuento" Id="Descuento" value="0">';
 					}
 					if($_SESSION['MODIPRECIOS']=='True'){
 						$Modifica ='';
@@ -149,6 +152,13 @@
 						$Existencia='';	
 						$Saldo=0;
 					}
+					if ($Nivel=='N'){
+						$Cantidad = 0;
+						$Precio = 0;
+					}else{
+						$Cantidad = 1;
+					}
+
 					?>
 					<div class="col s12 m12">
 						<div class="card">
@@ -158,7 +168,7 @@
 									<div class="row">
 										<span class="blue-text text-darken-4">ITEM:&nbsp;</span>
 										<span class="black-text text-darken-4"><?php echo $Item; ?></span>
-										<input type="text" class="hide" name="Item" value="<?php echo $Item; ?>">
+										<input type="text" class="hide" name="Item" id="Item" value="<?php echo $Item; ?>">
 										<input type="text" class="hide" name="Id_N" value="<?php echo $Id_N; ?>">
 										<input type="text" class="hide" name="ManejoExistencia" id="ManejoExistencia" value="<?php echo $ManejoExistencia; ?>">
 										<input type="text" class="hide" name="Saldo" id="Saldo" value="<?php echo $Saldo; ?>">
@@ -207,7 +217,7 @@
 									</p>
 									</div>
 									<div class="row input-field">
-      									<input id="Cantidad" name="Cantidad" type="Number"  value="1" min='0'max='99999' onfocus="var H =$(this).val();$(this).val(0); $(this).val(H);">
+      									<input id="Cantidad" name="Cantidad" type="Number"  value="<?php echo $Cantidad;?>" min='0'max='99999' onfocus="var H =$(this).val();$(this).val(0); $(this).val(H);" onkeyup='CambioPrecio()'> 
       									<label class="active" for="Cantidad">Cantidad</label>
     								</div>
 									<div class="row input-field">
@@ -261,6 +271,7 @@ $("#Precio").dblclick(function(){
 										beforeSend: function(objeto){
 										},
 										success: function(datos){
+											
 											$('#BuscarItem').modal('close');
 											CargarProductos();
 										}
@@ -270,6 +281,25 @@ $("#Precio").dblclick(function(){
 						}
 						event.preventDefault();
 					})	
+					function CambioPrecio(){
+						var Item = $('#Item').val();
+						var Cantidad = $('#Cantidad').val();
+						var Nivel = $("#Nivel").val();
+						if (Nivel == 'N'){
+							$.ajax({
+										type: "GET",
+										url: "Componentes/Ajax/Buscar_Precio.php?Item="+Item+"&Cantidad="+Cantidad,
+										beforeSend: function(objeto){
+										},
+										success: function(datos){
+											
+											var Precio = datos.split("-");
+											$('#Precio').val(Precio[1]);	
+										}
+									});
+						}
+						
+					}
 					</script>
 
 

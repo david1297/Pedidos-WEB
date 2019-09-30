@@ -433,10 +433,10 @@ function CambiarFechaEntrega(){
       var ajax;
       $("#CargarEdit").html('');
       $('#EditarItem').modal('open');
-      
+      var Nivel = $("#Nivel").val();
       ajax = null;
       ajax= $.ajax({
-      url:'Componentes/Ajax/CargarProductoEditar.php?Id='+Id,
+      url:'Componentes/Ajax/CargarProductoEditar.php?Id='+Id+'&Nivel='+Nivel,
         beforeSend: function(objeto){
     
         },
